@@ -26,6 +26,8 @@
     <wildfly.version>8.2.1.Final</wildfly.version>
     <arquillian-transaction.version>1.0.1.Final</arquillian-transaction.version>
     <surefire-plugin.version>2.18.1</surefire-plugin.version>
+    <frontend-maven-plugin.version>0.0.23</frontend-maven-plugin.version>
+    <clean-plugin.version>2.6.1</clean-plugin.version>
   </properties>
 
   <dependencyManagement>
@@ -117,11 +119,113 @@
         </configuration>
       </plugin>
       <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>${frontend-maven-plugin.version}</version>
+        <configuration>
+          <workingDirectory>frontend</workingDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>install-frontend-build-tools</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>v0.12.2</nodeVersion>
+              <npmVersion>2.7.5</npmVersion>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+
+            <!-- optional: default phase is "generate-resources" -->
+            <phase>generate-resources</phase>
+            <!-- optional: The default argument is actually
+              "install", so unless you need to run some other npm command,
+              you can remove this whole <configuration> section.
+              -->
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>bower install</id>
+            <goals>
+              <goal>bower</goal>
+            </goals>
+
+            <configuration>
+              <!-- optional: The default argument is actually
+              "install", so unless you need to run some other bower command,
+              you can remove this whole <configuration> section.
+              -->
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+
+          <execution>
+            <id>npm test</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+
+            <phase>test</phase>
+
+            <configuration>
+              <arguments>test</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>${clean-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>clean</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+              <filesets>
+                <fileset>
+                  <directory>tmp</directory>
+                </fileset>
+                <fileset>
+                  <directory>dist</directory>
+                </fileset>
+              </filesets>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>${war-plugin.version}</version>
         <configuration>
           <!-- Java EE 7 doesn't require web.xml, Maven needs to catch up! -->
           <failOnMissingWebXml>false</failOnMissingWebXml>
+          <webResources>
+            <resource>
+              <directory>${basedir}/frontend/dist</directory>
+              <excludes>
+                <exclude>tests/</exclude>
+                <exclude>**/.gitkeep</exclude>
+                <exclude>testem.js</exclude>
+                <exclude>assets/test-*</exclude>
+                <exclude>assets/passed.png</exclude>
+                <exclude>assets/failed.png</exclude>
+              </excludes>
+            </resource>
+          </webResources>
         </configuration>
       </plugin>
       <!-- The WildFly plugin deploys your war to a local WildFly container -->
@@ -136,6 +240,7 @@
         <artifactId>lombok-maven-plugin</artifactId>
         <version>${lombok.version}</version>
       </plugin>
+
     </plugins>
   </build>
 
