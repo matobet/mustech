@@ -13,7 +13,7 @@ regular run. To enable integration tests see Running Integration Tests.
 
 ## Running Integration Tests
 
-    mvn test -Parq-wildfly-managed
+    mvn test -Parq-wildfly-embedded
 
 or if you have already running instance of Wildfly
 

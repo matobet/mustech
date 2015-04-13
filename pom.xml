@@ -28,6 +28,7 @@
     <surefire-plugin.version>2.18.1</surefire-plugin.version>
     <frontend-maven-plugin.version>0.0.23</frontend-maven-plugin.version>
     <clean-plugin.version>2.6.1</clean-plugin.version>
+    <wildfly-test.version>8.2.0.Final</wildfly-test.version>
   </properties>
 
   <dependencyManagement>
@@ -275,14 +276,67 @@
       <!-- This profile will start a new WildFly instance, and execute the
           test, shutting it down when done -->
       <!-- Run with: mvn clean test -Parq-wildfly-managed -->
-      <id>arq-wildfly-managed</id>
+      <id>arq-wildfly-embedded</id>
       <dependencies>
         <dependency>
           <groupId>org.wildfly</groupId>
-          <artifactId>wildfly-arquillian-container-managed</artifactId>
+          <artifactId>wildfly-arquillian-container-embedded</artifactId>
+          <version>${wildfly-test.version}</version>
           <scope>test</scope>
         </dependency>
+        <dependency>
+          <groupId>org.wildfly</groupId>
+          <artifactId>wildfly-embedded</artifactId>
+          <version>${wildfly-test.version}</version>
+        </dependency>
       </dependencies>
+
+      <build>
+        <plugins>
+          <!-- You need the maven dependency plugin to download locally a zip with the server, unless you provide your own, it will download under the /target directory -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>unpack</id>
+                <phase>process-test-classes</phase>
+                <goals>
+                  <goal>unpack</goal>
+                </goals>
+                <configuration>
+                  <artifactItems>
+                    <artifactItem>
+                      <groupId>org.wildfly</groupId>
+                      <artifactId>wildfly-dist</artifactId>
+                      <version>${wildfly-test.version}</version>
+                      <type>zip</type>
+                      <overWrite>false</overWrite>
+                      <outputDirectory>target</outputDirectory>
+                    </artifactItem>
+                  </artifactItems>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${surefire-plugin.version}</version>
+            <configuration>
+              <!-- Fork every test because it will launch a separate AS instance -->
+              <forkMode>always</forkMode>
+              <systemPropertyVariables>
+                <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                <!-- the maven dependency plugin will have already downloaded the server on /target -->
+                <jboss.home>${project.basedir}/target/wildfly-${wildfly-test.version}</jboss.home>
+                <module.path>${project.basedir}/target/wildfly-${wildfly-test.version}/modules</module.path>
+              </systemPropertyVariables>
+              <redirectTestOutputToFile>false</redirectTestOutputToFile>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </profile>
 
     <profile>
