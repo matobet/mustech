@@ -1,4 +1,7 @@
 # mustech
+
+[![Build Status](https://travis-ci.org/matobet/mustech.svg?branch=master)](https://travis-ci.org/matobet/mustech)
+
 Project for PV243 JBoss
 
 # Testing
