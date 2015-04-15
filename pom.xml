@@ -22,13 +22,14 @@
     <compiler-plugin.version>2.3.2</compiler-plugin.version>
     <deltaspike-data.version>1.2.1</deltaspike-data.version>
     <arquillian.version>1.1.2.Final</arquillian.version>
-    <picketlink-javaee.version>2.7.0.CR3</picketlink-javaee.version>
     <wildfly.version>8.2.1.Final</wildfly.version>
     <arquillian-transaction.version>1.0.1.Final</arquillian-transaction.version>
     <surefire-plugin.version>2.18.1</surefire-plugin.version>
     <frontend-maven-plugin.version>0.0.23</frontend-maven-plugin.version>
     <clean-plugin.version>2.6.1</clean-plugin.version>
     <wildfly-test.version>8.2.0.Final</wildfly-test.version>
+    <picketlink.version>2.7.0.CR3</picketlink.version>
+    <jackson.version>2.5.1</jackson.version>
   </properties>
 
   <dependencyManagement>
@@ -37,6 +38,13 @@
         <groupId>org.wildfly.bom</groupId>
         <artifactId>jboss-javaee-7.0-with-tools</artifactId>
         <version>${wildfly.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-javaee-7.0</artifactId>
+        <version>${picketlink.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -63,6 +71,19 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
       <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>${jackson.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
 
     <dependency>

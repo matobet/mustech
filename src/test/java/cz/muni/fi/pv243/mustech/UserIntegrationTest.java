@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech;
 
+import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;

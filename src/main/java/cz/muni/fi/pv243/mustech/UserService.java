@@ -1,11 +1,11 @@
 package cz.muni.fi.pv243.mustech;
 
+import cz.muni.fi.pv243.mustech.dal.UserRepository;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 @Startup
 @Singleton
