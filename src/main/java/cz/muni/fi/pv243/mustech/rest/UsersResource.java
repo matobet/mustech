@@ -13,7 +13,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Path("/users")
 @Produces(JsonApi.MIME_TYPE)
