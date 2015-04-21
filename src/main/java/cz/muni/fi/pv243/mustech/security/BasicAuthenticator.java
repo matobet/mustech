@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.mustech.rest;
+package cz.muni.fi.pv243.mustech.security;
 
 
 import org.picketlink.annotations.PicketLink;

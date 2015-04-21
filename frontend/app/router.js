@@ -8,5 +8,5 @@ var Router = Ember.Router.extend({
 export default Router.map(function() {
   this.route('login');
   this.resource('users');
-  this.resource('events');
+  //this.resource('events');
 });
