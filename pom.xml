@@ -28,8 +28,8 @@
     <frontend-maven-plugin.version>0.0.23</frontend-maven-plugin.version>
     <clean-plugin.version>2.6.1</clean-plugin.version>
     <wildfly-test.version>8.2.0.Final</wildfly-test.version>
-    <picketlink.version>2.7.0.CR3</picketlink.version>
     <jackson.version>2.5.1</jackson.version>
+    <picketbox.version>5.0.0-2013Jan24</picketbox.version>
   </properties>
 
   <dependencyManagement>
@@ -38,13 +38,6 @@
         <groupId>org.wildfly.bom</groupId>
         <artifactId>jboss-javaee-7.0-with-tools</artifactId>
         <version>${wildfly.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
-        <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-javaee-7.0</artifactId>
-        <version>${picketlink.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -78,16 +71,6 @@
       <artifactId>jackson-annotations</artifactId>
       <version>${jackson.version}</version>
       <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-api</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-idm-api</artifactId>
     </dependency>
 
     <dependency>
@@ -133,6 +116,18 @@
       <artifactId>shrinkwrap-resolver-depchain</artifactId>
       <scope>test</scope>
       <type>pom</type>
+    </dependency>
+
+    <dependency>
+      <groupId>org.picketbox</groupId>
+      <artifactId>picketbox-http</artifactId>
+      <version>${picketbox.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.picketbox</groupId>
+      <artifactId>picketbox-core</artifactId>
+      <version>${picketbox.version}</version>
     </dependency>
 
   </dependencies>
@@ -270,7 +265,7 @@
       <plugin>
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok-maven-plugin</artifactId>
-        <version>${lombok.version}</version>
+        <version>${lombok.version}.0</version>
       </plugin>
 
     </plugins>

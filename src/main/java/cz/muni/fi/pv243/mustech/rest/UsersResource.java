@@ -10,12 +10,10 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Path("/users")
-@Produces(JsonApi.MIME_TYPE)
 public class UsersResource {
 
     private final Logger log = LoggerFactory.getLogger(UsersResource.class);
