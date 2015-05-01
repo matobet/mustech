@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.mustech.util;
+package cz.muni.fi.pv243.mustech.rest;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
