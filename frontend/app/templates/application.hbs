@@ -1,11 +1,31 @@
-<h2 id="title">Welcome to Ember.js</h2>
+<header>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Mustech</a>
+            </div>
+            <div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                  {{#if session.isAuthenticated}}
+                      <a {{ action 'invalidateSession' }}>Logout</a>
+                  {{else}}
+                    {{partial "login"}}
+                  {{/if}}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
-{{#if session.isAuthenticated}}
-  <a {{ action 'invalidateSession' }}>Logout</a>
-{{else}}
-  {{#link-to 'login'}}Login{{/link-to}}
-{{/if}}
+<div id="main-container" class="container">
+  {{partial "place-finder"}}
+  {{outlet}}
+</div>
 
-{{#link-to 'users'}}Users{{/link-to}}
-
-{{outlet}}
+<footer class="navbar-static-bottom">
+    <div class="container">
+        <div class="copyright">
+            Copyright &copy; 2015 <a href="https://github.com/matobet/mustech">Mustech</a>. All Rights Reserved.
+        </div>
+    </div>
+</footer>
