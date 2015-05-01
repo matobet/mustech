@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.mustech.util;
+package cz.muni.fi.pv243.mustech.rest;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;
