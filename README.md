@@ -4,17 +4,27 @@
 
 Project for PV243 JBoss
 
-# Testing
+## Prerequisites
+
+* maven
+* wildfly 8.2.0+
+
+## Installation
+
+    mvn clean install
+    wildfly:deploy
+
+## Testing
 
 When writing test we differentiate between regular JUnit tests and Arquillian integration tests.
 The integration test class name should end in "IntegrationTest" and those tests will be skipped in 
 regular run. To enable integration tests see Running Integration Tests.
 
-## Running Unit Tests
+### Running Unit Tests
 
     mvn test
 
-## Running Integration Tests
+### Running Integration Tests
 
     mvn test -Parq-wildfly-embedded
 
