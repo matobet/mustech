@@ -15,7 +15,12 @@ public class SecurityConfigurer implements ConfigurationBuilderProvider {
     public HTTPConfigurationBuilder getBuilder(ServletContext servletcontext) {
         HTTPConfigurationBuilder configurationBuilder = new HTTPConfigurationBuilder();
 
+        configurationBuilder.identityManager().jpaStore();
+
         configurationBuilder.protectedResource()
+                .resource("/api/login", ProtectedResourceConstraint.NOT_PROTECTED)
+                .resource("/api/logout", ProtectedResourceConstraint.NOT_PROTECTED)
+                .resource("/api/signup", ProtectedResourceConstraint.NOT_PROTECTED)
                 .resource("/api/*", ProtectedResourceConstraint.AUTHENTICATION)
                 .resource("/*", ProtectedResourceConstraint.NOT_PROTECTED);
 
