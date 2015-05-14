@@ -13,7 +13,6 @@
     <web-resource-collection>
       <web-resource-name>permitted</web-resource-name>
       <url-pattern>/assets/*</url-pattern>
-      <url-pattern>/api/login</url-pattern>
       <url-pattern>/api/logout</url-pattern>
       <url-pattern>/api/register</url-pattern>
     </web-resource-collection>
@@ -22,6 +21,7 @@
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>restricted</web-resource-name>
+      <url-pattern>/api/login</url-pattern>
       <url-pattern>/api/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
