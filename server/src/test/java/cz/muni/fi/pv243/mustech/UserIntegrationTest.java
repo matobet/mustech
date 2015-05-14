@@ -1,6 +1,9 @@
 package cz.muni.fi.pv243.mustech;
 
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
+import cz.muni.fi.pv243.mustech.model.RoleType;
+import cz.muni.fi.pv243.mustech.model.User;
+import cz.muni.fi.pv243.mustech.service.UserService;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -16,7 +19,8 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import java.io.File;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
 
 @RunWith(Arquillian.class)
 public class UserIntegrationTest {
@@ -35,15 +39,20 @@ public class UserIntegrationTest {
     }
 
     @Inject
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Test
     @Transactional
     public void testUsers() {
-        User user = new User();
-        user.setName("Franta");
-        userRepository.save(user);
+        User admin = new User();
+        admin.setName("admin");
+        admin.setPassword("123456");
+        admin.setEmail("admin@admin.cz");
+        admin.setRole(RoleType.ADMIN);
 
-        assertEquals(user.getId(), userRepository.findByName("Franta").getId());
+        userService.save(admin);
+
+        assertThat(admin.getId(), is(not(null)));
+        assertThat(userService.findById(admin.getId()), is(equalTo(admin)));
     }
 }
