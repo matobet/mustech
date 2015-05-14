@@ -5,23 +5,15 @@
              version="2.0">
 
     <persistence-unit name="mustech" transaction-type="JTA">
-        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
-
-        <class>org.picketlink.idm.jpa.schema.IdentityObject</class>
-        <class>org.picketlink.idm.jpa.schema.PartitionObject</class>
-        <class>org.picketlink.idm.jpa.schema.RelationshipObject</class>
-        <class>org.picketlink.idm.jpa.schema.RelationshipIdentityObject</class>
-        <class>org.picketlink.idm.jpa.schema.RelationshipObjectAttribute</class>
-        <class>org.picketlink.idm.jpa.schema.IdentityObjectAttribute</class>
-        <class>org.picketlink.idm.jpa.schema.CredentialObject</class>
-        <class>org.picketlink.idm.jpa.schema.CredentialObjectAttribute</class>
 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
         <properties>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.show_sql" value="false" />
             <property name="hibernate.transaction.flush_before_completion" value="true" />
         </properties>
     </persistence-unit>
+
 </persistence>

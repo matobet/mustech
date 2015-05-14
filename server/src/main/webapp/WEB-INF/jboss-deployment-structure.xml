@@ -3,7 +3,7 @@
   <deployment>
     <dependencies>
       <!-- add your project dependencies here -->
-      <module name="org.slf4j" />
+      <module name="org.slf4j"/>
     </dependencies>
   </deployment>
 </jboss-deployment-structure>

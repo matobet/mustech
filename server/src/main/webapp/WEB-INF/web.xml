@@ -4,38 +4,42 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-  <display-name>HelloWorld Application</display-name>
-  <description>
-    This is a simple web application with a source code organization
-    based on the recommendations of the Application Developer's Guide.
-  </description>
+  <display-name>Mustech</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
 
   <security-constraint>
     <web-resource-collection>
-      <web-resource-name>public</web-resource-name>
+      <web-resource-name>permitted</web-resource-name>
       <url-pattern>/assets/*</url-pattern>
+      <url-pattern>/api/login</url-pattern>
+      <url-pattern>/api/logout</url-pattern>
+      <url-pattern>/api/register</url-pattern>
     </web-resource-collection>
   </security-constraint>
 
-  <context-param>
-    <param-name>org.picketbox.authentication</param-name>
-    <param-value>BASIC</param-value>
-  </context-param>
-  <context-param>
-    <param-name>org.picketbox.configuration.provider</param-name>
-    <param-value>cz.muni.fi.pv243.mustech.security.SecurityConfigurer</param-value>
-  </context-param>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>restricted</web-resource-name>
+      <url-pattern>/api/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>ADMIN</role-name>
+      <role-name>USER</role-name>
+    </auth-constraint>
+  </security-constraint>
 
-  <filter>
-    <filter-name>PicketBox Delegating Filter</filter-name>
-    <filter-class>org.picketbox.http.filters.DelegatingSecurityFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>PicketBox Delegating Filter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>ApplicationRealm</realm-name>
+  </login-config>
+
+  <security-role>
+    <role-name>ADMIN</role-name>
+  </security-role>
+  <security-role>
+    <role-name>USER</role-name>
+  </security-role>
 
 </web-app>
