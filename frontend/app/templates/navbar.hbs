@@ -1,0 +1,30 @@
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+          {{#link-to index class="navbar-brand"}}Mustech{{/link-to}}
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+            </ul>
+            <div id="login-form" class="navbar-right">
+              {{#if session.isAuthenticated}}
+                <div class="btn-group navbar-btn">
+                    <button class="btn btn-default">{{session.secure.identification}}</button>
+                    <button {{action 'invalidateSession'}} type="submit" class="btn btn-info">Logout</button>
+                </div>
+              {{else}}
+                  <form class="navbar-form" {{action 'authenticate' on='submit'}}>
+                      <div class="form-group">
+                        {{input id='identification' type='text' class='form-control' name='email' placeholder='E-mail' value=identification}}
+                      </div>
+                      <div class="form-group">
+                        {{input id='password' type='password' class='form-control' name='password' placeholder='Password' value=password}}
+                      </div>
+                      <button type="submit" class="btn btn-default">Login</button>
+                  </form>
+              {{/if}}
+            </div>
+        </div>
+    </div>
+</nav>
