@@ -1,9 +1,11 @@
 package cz.muni.fi.pv243.mustech;
 
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
+import cz.muni.fi.pv243.mustech.model.BaseModel;
 import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
 import cz.muni.fi.pv243.mustech.service.UserService;
+import cz.muni.fi.pv243.mustech.service.UserServiceImpl;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -23,7 +25,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Arquillian.class)
-public class UserIntegrationTest {
+public class UserServiceIntegrationTest {
 
     @Deployment
     public static Archive<?> createArchive() {
@@ -32,7 +34,14 @@ public class UserIntegrationTest {
                 .resolve().withTransitivity().asFile();
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addAsLibraries(libs)
-                .addClasses(Resources.class, User.class, UserRepository.class)
+                .addClasses(
+                        Resources.class,
+                        BaseModel.class,
+                        User.class,
+                        RoleType.class,
+                        UserService.class,
+                        UserServiceImpl.class,
+                        UserRepository.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsResource("META-INF/apache-deltaspike.properties")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
@@ -43,7 +52,7 @@ public class UserIntegrationTest {
 
     @Test
     @Transactional
-    public void testUsers() {
+    public void testSave() {
         User admin = new User();
         admin.setName("admin");
         admin.setPassword("123456");
@@ -52,7 +61,7 @@ public class UserIntegrationTest {
 
         userService.save(admin);
 
-        assertThat(admin.getId(), is(not(null)));
+        assertThat(admin.getId(), not(nullValue()));
         assertThat(userService.findById(admin.getId()), is(equalTo(admin)));
     }
 }
