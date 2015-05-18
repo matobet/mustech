@@ -1,0 +1,11 @@
+<div class="overlay" {{action 'close'}}></div>
+<div class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" aria-hidden="true" {{action 'close'}}>&times;</button>
+        {{yield}}
+      </div>
+    </div>
+  </div>
+</div>

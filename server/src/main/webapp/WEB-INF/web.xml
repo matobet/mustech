@@ -13,15 +13,30 @@
     <web-resource-collection>
       <web-resource-name>permitted</web-resource-name>
       <url-pattern>/assets/*</url-pattern>
-      <url-pattern>/api/logout</url-pattern>
-      <url-pattern>/api/register</url-pattern>
     </web-resource-collection>
+  </security-constraint>
+
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>permitted-post-method</web-resource-name>
+      <url-pattern>/api/users</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>DELETE</http-method>
+      <http-method>PUT</http-method>
+      <http-method>TRACE</http-method>
+      <http-method>HEAD</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>ADMIN</role-name>
+      <role-name>USER</role-name>
+    </auth-constraint>
   </security-constraint>
 
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>restricted</web-resource-name>
       <url-pattern>/api/login</url-pattern>
+      <url-pattern>/api/logout</url-pattern>
       <url-pattern>/api/*</url-pattern>
     </web-resource-collection>
     <auth-constraint>
@@ -40,6 +55,9 @@
   </security-role>
   <security-role>
     <role-name>USER</role-name>
+  </security-role>
+  <security-role>
+    <role-name>GUEST</role-name>
   </security-role>
 
 </web-app>

@@ -1,16 +1,14 @@
 package cz.muni.fi.pv243.mustech.rest;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
 import cz.muni.fi.pv243.mustech.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,6 +32,14 @@ public class UsersResource {
     public User findById(@PathParam("id") Long id) {
         log.info("Getting: " + id);
         return userService.findById(id);
+    }
+
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public User register(User user) {
+        user.setRole(RoleType.USER);
+        return userService.save(user);
     }
 
     @JsonRootName("users")
