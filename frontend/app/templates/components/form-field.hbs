@@ -1,6 +1,6 @@
 <div class="form-group">
-    <label {{bind-attr for=label class="control-label"}}>{{label}}</label>
-    <div>
-      {{input type=type value=value id=label class="form-control"}}
+    <label class="col-sm-3 control-label" {{bind-attr for=label}}>{{label}}</label>
+    <div class="col-sm-9">
+      {{input id=label type=type value=value placeholder=label class="form-control"}}
     </div>
 </div>
