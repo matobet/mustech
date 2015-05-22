@@ -37,7 +37,9 @@ export default Base.extend({
 
   invalidate() {
     return new Ember.RSVP.Promise(resolve => {
-      Ember.$.ajax({url: this.logoutEndpoint, type: 'POST'}).always(resolve);
+      Ember.$.ajax({
+        url: this.logoutEndpoint,
+        type: 'POST'}).always(resolve);
     });
   }
 });
