@@ -10,18 +10,18 @@ export default Ember.Controller.extend({
       return this.send('closeModal');
     },
     register: function() {
+      var _this = this;
       this.store.createRecord('user', {
         email: this.get('email'),
         password: this.get('password'),
         name: this.get('name')
       }).save()
         .then(function() {
-          console.log("success");
-          //TODO: close modal
-          //TODO: notifications on success
+          _this.notify.info('Registration successful!');
+          return _this.send('closeModal');
         }, function() {
-          console.log("error");
-          //TODO: notifications on failure
+          Ember.Logger.debug('Registration failed!');
+          _this.notify.alert('Registration failed!');
         });
     }
   }
