@@ -22,7 +22,12 @@ module.exports = function(environment) {
     },
 
     'simple-auth': {
-      authorizer: 'authorizer:basic'
+      authorizer: 'authorizer:basic',
+      store: 'simple-auth-session-store:cookie'
+    },
+
+    'simple-auth-cookie-store': {
+      cookieExpirationTime: null
     },
 
     APP: {
