@@ -4,6 +4,13 @@
 
 Project for PV243 JBoss
 
+## Description
+Built-in users:
+
+    login/password:
+    admin/admin@admin.cz
+    user/user@user.cz
+
 ## Prerequisites
 
 * maven
