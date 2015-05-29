@@ -1,9 +1,7 @@
 {{#modal-dialog action="close"}}
-    <h2>Registration</h2>
-
-    {{#object-form action="register" submitBtnLabel="Register"}}
-      {{form-field label="Name" type="text" value=name}}
-      {{form-field label="Email" type="email" value=email}}
-      {{form-field label="Password" type="password" value=password}}
-    {{/object-form}}
+    {{#modal-object-form action="register" submitBtnLabel="Register"}}
+      {{form-field label="Name" type="text" value=name placeholder="Name"}}
+      {{form-field label="Email" type="email" value=email placeholder="Email"}}
+      {{form-field label="Password" type="password" value=password placeholder="Password"}}
+    {{/modal-object-form}}
 {{/modal-dialog}}

@@ -9,21 +9,13 @@
             </ul>
             <div id="login-form" class="navbar-right">
               {{#if session.isAuthenticated}}
-                  <div class="btn-group navbar-btn">
-                      <button class="btn btn-default">{{session.secure.identification}}</button>
-                      <button {{action 'logout'}} type="submit" class="btn btn-info">Logout</button>
+                  <div class="btn-group">
+                      <button class="btn btn-material-amber navbar-btn btn-flat">{{session.secure.identification}}</button>
+                      <button {{action 'logout'}} type="submit" class="btn btn-info navbar-btn">Logout</button>
                   </div>
               {{else}}
-                  <form class="navbar-form" {{action 'authenticate' on='submit'}}>
-                      <div class="form-group">
-                        {{input id='identification' type='text' class='form-control input-sm' name='email' placeholder='E-mail' value=identification}}
-                      </div>
-                      <div class="form-group">
-                        {{input id='password' type='password' class='form-control input-sm' name='password' placeholder='Password' value=password}}
-                      </div>
-                      <button type="submit" class="btn btn-default btn-sm">Login</button>
-                      <button {{action 'openModal' 'register-modal' user}} type="button" class="btn btn-link btn-sm">Register</button>
-                  </form>
+                  <button {{action 'openModal' 'login-modal'}} type="button" class="btn btn-material-orange navbar-btn">Login</button>
+                  <button {{action 'openModal' 'register-modal' user}} type="button" class="btn btn-link btn-sm navbar-btn">Register</button>
               {{/if}}
             </div>
         </div>
