@@ -10,7 +10,7 @@
             <div id="login-form" class="navbar-right">
               {{#if session.isAuthenticated}}
                   <div class="btn-group">
-                      <button class="btn btn-material-amber navbar-btn btn-flat">{{session.secure.identification}}</button>
+                      <button class="btn btn-material-amber navbar-btn">{{session.secure.identification}}</button>
                       <button {{action 'logout'}} type="submit" class="btn btn-info navbar-btn">Logout</button>
                   </div>
               {{else}}
