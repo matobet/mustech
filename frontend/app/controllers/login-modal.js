@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: ['authentication'],
+  needs: ['authenticator'],
   actions: {
     close() {
       return this.send('closeModal');
@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
         });
 
       var credentials = this.getProperties('identification', 'password');
-      this.get('controllers.authentication').send('authenticate', credentials, defer);
+      this.get('controllers.authenticator').send('authenticate', credentials, defer);
     }
   }
 });
