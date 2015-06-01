@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech.service;
 
+import cz.muni.fi.pv243.mustech.model.Answer;
 import cz.muni.fi.pv243.mustech.model.Issue;
 
 /**
@@ -9,8 +10,8 @@ import cz.muni.fi.pv243.mustech.model.Issue;
 /**
  * Issue related services.
  */
-public interface IssueService {
-    Issue saveOrUpdate(Issue issue);
-    Issue findById(Long id);
+public interface AnswerService {
+    Answer saveOrUpdate(Answer answer);
+    Answer findById(Long id);
     void delete(Long id);
 }

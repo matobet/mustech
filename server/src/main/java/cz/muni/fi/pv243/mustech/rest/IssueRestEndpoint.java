@@ -5,7 +5,9 @@ import cz.muni.fi.pv243.mustech.service.IssueService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -14,8 +16,9 @@ import javax.ws.rs.core.MediaType;
  */
 @Path("/issues")
 @Produces(MediaType.APPLICATION_JSON)
-public class IssueEndpoint {
-    private final Logger log = LoggerFactory.getLogger(IssueEndpoint.class);
+@RequestScoped
+public class IssueRestEndpoint {
+    private final Logger log = LoggerFactory.getLogger(IssueRestEndpoint.class);
 
     @Inject
     private IssueService issueService;
@@ -30,15 +33,26 @@ public class IssueEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Issue save(Issue issue)
+    public Issue save(@Valid Issue issue)
     {
+        issue.setId(null);
         return issueService.saveOrUpdate(issue);
     }
 
     @PUT
+    @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Issue issue)
+    public void update(@PathParam("id") Long id, @Valid Issue issue)
     {
+        issue.setId(id);
         issueService.saveOrUpdate(issue);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void delete(@PathParam("id") Long id)
+    {
+        issueService.delete(id);
     }
 }

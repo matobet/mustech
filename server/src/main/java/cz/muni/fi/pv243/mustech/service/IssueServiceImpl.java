@@ -6,6 +6,7 @@ import cz.muni.fi.pv243.mustech.model.Issue;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import javax.validation.Valid;
 
 /**
  * Created by Tomas on 26. 5. 2015.
@@ -17,7 +18,7 @@ public class IssueServiceImpl implements IssueService {
     private IssueRepository issueRepository;
 
     @Override
-    public Issue saveOrUpdate(Issue issue)
+    public Issue saveOrUpdate(@Valid Issue issue)
     {
         return issueRepository.save(issue);
     }
@@ -26,5 +27,10 @@ public class IssueServiceImpl implements IssueService {
     public Issue findById(Long id)
     {
         return issueRepository.findBy(id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        issueRepository.remove(issueRepository.findBy(id));
     }
 }
