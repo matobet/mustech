@@ -19,8 +19,8 @@ export default Ember.Controller.extend({
         .then(function() {
           _this.notify.info('Registration successful!');
           return _this.send('closeModal');
-        }, function() {
-          Ember.Logger.debug('Registration failed!');
+        }, function(e) {
+          Ember.Logger.debug('Registration failed!', e);
           _this.notify.alert('Registration failed!');
         });
     }
