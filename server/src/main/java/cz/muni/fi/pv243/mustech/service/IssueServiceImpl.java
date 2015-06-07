@@ -15,15 +15,12 @@ import java.util.List;
  */
 @Named
 @Transactional
-public class IssueServiceImpl extends BaseService implements IssueService {
+public class IssueServiceImpl implements IssueService {
     @Inject
     private IssueRepository issueRepository;
 
     @Override
     public Issue saveOrUpdate(@Valid Issue issue) {
-        issue.setCreatedAt(new Date());
-        issue.setCreatedBy(getCurrentUser());
-
         return issueRepository.save(issue);
     }
 
