@@ -1,17 +1,32 @@
 package cz.muni.fi.pv243.mustech.service;
 
+import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.User;
 
-import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
 
 /**
  * @author Milan
  */
-public interface UserService {
+@Named
+@Transactional
+public class UserService extends AbstractGenericService<User, UserRepository> {
 
-    User save(User user);
-    void remove(User user);
-    User findById(Long id);
-    User findByEmail(String email);
-    List<User> findAll();
+    @Inject
+    private UserRepository userRepository;
+
+    public UserService() {
+        super(User.class);
+    }
+
+    @Override
+    protected UserRepository getRepository() {
+        return userRepository;
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

@@ -1,22 +1,28 @@
 package cz.muni.fi.pv243.mustech.service;
 
+import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.model.Issue;
 
-import javax.validation.Valid;
-import java.util.Collection;
-import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
 
 /**
- * Created by Tomas on 26. 5. 2015.
+ * @author Tomas
  */
+@Named
+@Transactional
+public class IssueService extends AbstractGenericService<Issue, IssueRepository> {
 
-/**
- * Issue related services.
- */
-public interface IssueService {
-    Issue saveOrUpdate(@Valid Issue issue);
-    Issue findById(Long id);
-    void delete(Long id);
+    @Inject
+    private IssueRepository issueRepository;
 
-    List<Issue> findAll();
+    public IssueService() {
+        super(Issue.class);
+    }
+
+    @Override
+    protected IssueRepository getRepository() {
+        return issueRepository;
+    }
 }

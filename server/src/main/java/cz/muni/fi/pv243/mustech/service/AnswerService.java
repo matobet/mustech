@@ -1,19 +1,28 @@
 package cz.muni.fi.pv243.mustech.service;
 
+import cz.muni.fi.pv243.mustech.dal.AnswerRepository;
 import cz.muni.fi.pv243.mustech.model.Answer;
-import cz.muni.fi.pv243.mustech.model.Issue;
 
-import javax.validation.Valid;
-
-/**
- * Created by Tomas on 26. 5. 2015.
- */
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
 
 /**
- * Issue related services.
+ * @author Tomas
  */
-public interface AnswerService {
-    Answer saveOrUpdate(@Valid Answer answer);
-    Answer findById(Long id);
-    void delete(Long id);
+@Named
+@Transactional
+public class AnswerService extends AbstractGenericService<Answer, AnswerRepository> {
+
+    @Inject
+    private AnswerRepository answerRepository;
+
+    public AnswerService() {
+        super(Answer.class);
+    }
+
+    @Override
+    protected AnswerRepository getRepository() {
+        return answerRepository;
+    }
 }

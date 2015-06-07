@@ -39,7 +39,7 @@ public class UsersResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public User register(User user) {
         user.setRole(RoleType.USER);
-        return userService.save(user);
+        return userService.saveOrUpdate(user);
     }
 
     @JsonRootName("users")

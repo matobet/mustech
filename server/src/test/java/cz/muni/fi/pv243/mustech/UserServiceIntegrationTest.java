@@ -4,8 +4,9 @@ import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.BaseModel;
 import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
+import cz.muni.fi.pv243.mustech.service.AbstractGenericService;
+import cz.muni.fi.pv243.mustech.service.GenericService;
 import cz.muni.fi.pv243.mustech.service.UserService;
-import cz.muni.fi.pv243.mustech.service.UserServiceImpl;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -21,10 +22,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import java.io.File;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Arquillian.class)
@@ -42,8 +40,9 @@ public class UserServiceIntegrationTest {
                         BaseModel.class,
                         User.class,
                         RoleType.class,
+                        GenericService.class,
+                        AbstractGenericService.class,
                         UserService.class,
-                        UserServiceImpl.class,
                         UserRepository.class)
                 .addAsResource("META-INF/persistence.xml")
                 .addAsResource("META-INF/apache-deltaspike.properties")
@@ -62,7 +61,7 @@ public class UserServiceIntegrationTest {
         admin.setEmail("admin@admin.cz");
         admin.setRole(RoleType.ADMIN);
 
-        userService.save(admin);
+        userService.saveOrUpdate(admin);
 
         assertThat(admin.getId(), not(nullValue()));
         assertThat(userService.findById(admin.getId()), is(equalTo(admin)));

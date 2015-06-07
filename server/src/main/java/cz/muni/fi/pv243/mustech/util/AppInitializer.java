@@ -2,7 +2,7 @@ package cz.muni.fi.pv243.mustech.util;
 
 import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
-import cz.muni.fi.pv243.mustech.service.UserServiceImpl;
+import cz.muni.fi.pv243.mustech.service.UserService;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 public class AppInitializer {
 
     @Inject
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @PostConstruct
     private void initUsers() {
@@ -31,7 +31,7 @@ public class AppInitializer {
         user.setEmail("user@user.cz");
         user.setRole(RoleType.USER);
 
-        userService.save(admin);
-        userService.save(user);
+        userService.saveOrUpdate(admin);
+        userService.saveOrUpdate(user);
     }
 }
