@@ -6,6 +6,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+              {{#if session.isAuthenticated}}
+                  <li>{{#link-to 'events'}}Events <span class="badge">{{numberOfActiveEvents}}</span>{{/link-to}}</li>
+              {{/if}}
             </ul>
             <div id="login-form" class="navbar-right">
               {{#if session.isAuthenticated}}
