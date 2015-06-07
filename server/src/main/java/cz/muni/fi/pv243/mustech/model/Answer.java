@@ -6,12 +6,17 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 @JsonRootName("answer")
 public class Answer extends BaseModel {
+
+    @ManyToOne
+    private Option option;
 
     @ManyToOne
     private Poll poll;
