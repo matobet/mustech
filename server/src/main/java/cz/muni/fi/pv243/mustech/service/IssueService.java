@@ -2,6 +2,8 @@ package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.model.Issue;
 
+import javax.validation.Valid;
+
 /**
  * Created by Tomas on 26. 5. 2015.
  */
@@ -10,7 +12,7 @@ import cz.muni.fi.pv243.mustech.model.Issue;
  * Issue related services.
  */
 public interface IssueService {
-    Issue saveOrUpdate(Issue issue);
+    Issue saveOrUpdate(@Valid Issue issue);
     Issue findById(Long id);
     void delete(Long id);
 }
