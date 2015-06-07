@@ -7,19 +7,23 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Tomas on 26. 5. 2015.
  */
 @Named
 @Transactional
-public class IssueServiceImpl implements IssueService {
+public class IssueServiceImpl extends BaseService implements IssueService {
     @Inject
     private IssueRepository issueRepository;
 
     @Override
-    public Issue saveOrUpdate(@Valid Issue issue)
-    {
+    public Issue saveOrUpdate(@Valid Issue issue) {
+        issue.setCreatedAt(new Date());
+        issue.setCreatedBy(getCurrentUser());
+
         return issueRepository.save(issue);
     }
 
@@ -32,5 +36,10 @@ public class IssueServiceImpl implements IssueService {
     @Override
     public void delete(Long id) {
         issueRepository.remove(issueRepository.findBy(id));
+    }
+
+    @Override
+    public List<Issue> findAll() {
+        return issueRepository.findAll();
     }
 }

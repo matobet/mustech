@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech.rest;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import org.slf4j.Logger;
@@ -10,6 +11,8 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by Tomas on 26. 5. 2015.
@@ -22,6 +25,11 @@ public class IssueRestEndpoint {
 
     @Inject
     private IssueService issueService;
+
+    @GET
+    public Issues getAll() {
+        return new Issues(issueService.findAll());
+    }
 
     @GET
     @Path("/{id}")
@@ -54,5 +62,12 @@ public class IssueRestEndpoint {
     public void delete(@PathParam("id") Long id)
     {
         issueService.delete(id);
+    }
+
+    @JsonRootName("issues")
+    class Issues extends ArrayList<Issue> {
+        public Issues(Collection<Issue> issues) {
+            addAll(issues);
+        }
     }
 }

@@ -9,4 +9,8 @@ export default Router.map(function() {
   this.route('events');
   this.route('users');
   this.resource('users');
+
+  this.resource('issues', function () {
+    this.route('new');
+  });
 });

@@ -1,0 +1,7 @@
+{{#each issue in model}}
+  <li>Name: {{issue.name}}</li>
+  <li>Description: {{issue.description}}</li>
+  <li>Created by: {{issue.createdBy.name}}</li>
+{{else}}
+  There appears to be no issue here. Create new {{#link-to 'issues.new'}}here{{/link-to}}.
+{{/each}}
