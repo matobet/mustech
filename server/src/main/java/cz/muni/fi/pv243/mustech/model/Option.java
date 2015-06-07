@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 @Data
@@ -14,6 +16,9 @@ import javax.persistence.ManyToOne;
 public class Option extends BaseModel {
 
     private String value;
+
+    @OneToMany(mappedBy = "option")
+    private List<Answer> answers;
 
     @ManyToOne
     private Poll poll;
