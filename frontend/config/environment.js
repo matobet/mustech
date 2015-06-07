@@ -27,6 +27,7 @@ module.exports = function(environment) {
     },
 
     'simple-auth-cookie-store': {
+      // expires on browser close
       cookieExpirationTime: null
     },
 

@@ -4,7 +4,6 @@ import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 export default Ember.Route.extend(ApplicationRouteMixin, {
   actions: {
     logout() {
-      console.log("here");
       this.get('session').invalidate()
         .then(() => {
           this.transitionTo('index');
