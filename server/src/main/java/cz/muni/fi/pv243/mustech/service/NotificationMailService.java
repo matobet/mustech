@@ -43,5 +43,6 @@ public class NotificationMailService {
     public void sendEmail(NotificationMessage message)
     {
         sendEmail(message.getDestination(), message.getSubject(), message.getMessage());
+        System.out.println("Sending mail to: " + message.getDestination());
     }
 }
