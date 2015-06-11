@@ -18,7 +18,7 @@ Built-in users:
 
 ## Installation
 
-### standalone.xml
+### standalone-full.xml
 
     <security-domain name="MustechDomain" cache-type="default">
         <authentication>
