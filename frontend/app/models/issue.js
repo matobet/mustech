@@ -4,7 +4,7 @@ export default DS.Model.extend({
   name: DS.attr('string'),
   description: DS.attr('string'),
 
-  createdBy: DS.belongsTo('user'),
+  createdBy: DS.hasOneFragment('user'),
   createdAt: DS.attr('date'),
   expiresAt: DS.attr('date'),
 
