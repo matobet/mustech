@@ -2,6 +2,8 @@
     <li>Name: {{issue.name}}</li>
     <li>Description: {{issue.description}}</li>
     <li>Created by: {{issue.createdBy.email}}</li>
+    <li>Created at: {{issue.createdAt}}</li>
+    <li>Expires at: {{issue.expiresAt}}</li>
 {{/each}}
 <br/>
 Create new {{#link-to 'issues.new'}}here{{/link-to}}.

@@ -8,8 +8,8 @@ Project for PV243 JBoss
 Built-in users:
 
     login/password:
-    admin@admin.cz/admin
-    user@user.cz/user
+    admin@admin.cz/admin123
+    user@user.cz/user123
 
 ## Prerequisites
 
