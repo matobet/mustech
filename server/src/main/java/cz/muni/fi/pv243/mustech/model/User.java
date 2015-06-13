@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.hibernate.validator.constraints.Email;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +24,8 @@ public class User extends BaseModel {
     @Size(min = 3, max = 30)
     private String name;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
+    @Email
     private String email;
 
     @Column(nullable = false, length = 50)

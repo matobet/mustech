@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.UserService;
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +51,8 @@ public class IssueRestEndpoint {
     public Issue save(@Context HttpServletRequest req, @Valid Issue issue) {
         issue.setCreatedBy(userService.findByEmail(req.getUserPrincipal().getName()));
         issue.setCreatedAt(new Date());
+        // TODO: right now just dummy date
+        issue.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
         issue.setId(null);
         return issueService.saveOrUpdate(issue);
     }

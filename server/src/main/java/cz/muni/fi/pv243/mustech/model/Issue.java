@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ import java.util.List;
 @JsonRootName("issue")
 public class Issue extends BaseModel {
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     @Size(min = 1, max = 255)
     private String name;
 
@@ -24,6 +25,7 @@ public class Issue extends BaseModel {
     private String description;
 
     @ManyToOne(optional = false)
+    @JsonIdentityReference(alwaysAsId = true)
     private User createdBy;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -35,8 +37,10 @@ public class Issue extends BaseModel {
     private Date expiresAt;
 
     @OneToMany(mappedBy = "issue")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Poll> polls;
 
     @OneToMany(mappedBy = "issue")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Post> posts;
 }

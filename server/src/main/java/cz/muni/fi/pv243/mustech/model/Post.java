@@ -1,13 +1,11 @@
 package cz.muni.fi.pv243.mustech.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -17,7 +15,7 @@ import java.util.Date;
 @JsonRootName("post")
 public class Post extends BaseModel {
 
-    @Column
+    @Column(nullable = false)
     @Size(min = 1, max = 255)
     private String text;
 
@@ -27,11 +25,9 @@ public class Post extends BaseModel {
 
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("user_id")
     private User user;
 
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("issue_id")
     private Issue issue;
 }
