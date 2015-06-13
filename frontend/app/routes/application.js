@@ -24,5 +24,29 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
         parentView: 'application'
       });
     }
+  },
+
+  socketService: Ember.inject.service('websockets'),
+
+  activate() {
+    // TODO: propagate user credentials via websocket
+    let socket = this.get('socketService').socketFor(`ws://${window.location.host}${document.location.pathname.replace(/[^/]*$/, '')}ws`);
+
+    socket.on('open', this.openHandler, this);
+    socket.on('message', this.messageHandler, this);
+    socket.on('close', this.closeHandler, this);
+  },
+
+  openHandler() {
+    console.log('open');
+  },
+
+  messageHandler(data) {
+    console.log('message: ' + JSON.stringify(data));
+    this.store.push(data.type, data.item);
+  },
+
+  closeHandler() {
+    console.log('close');
   }
 });
