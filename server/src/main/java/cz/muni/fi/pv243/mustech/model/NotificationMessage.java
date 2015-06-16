@@ -7,13 +7,13 @@ import java.io.Serializable;
  */
 public class NotificationMessage implements Serializable {
     private final String destination;
-    private final String Subject;
-    private final String Message;
+    private final String subject;
+    private final String message;
 
     public NotificationMessage(String destination, String subject, String message) {
         this.destination = destination;
-        Subject = subject;
-        Message = message;
+        this.subject = subject;
+        this.message = message;
     }
 
     public String getDestination() {
@@ -21,10 +21,10 @@ public class NotificationMessage implements Serializable {
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public String getMessage() {
-        return Message;
+        return message;
     }
 }

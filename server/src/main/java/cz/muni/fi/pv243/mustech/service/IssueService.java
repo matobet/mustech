@@ -2,11 +2,13 @@ package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.model.Issue;
+import cz.muni.fi.pv243.mustech.util.UserNotification;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
+import java.util.Collections;
 
 /**
  * @author Tomas
@@ -19,7 +21,7 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
     private IssueRepository issueRepository;
 
     @Inject
-    private Event<Issue> issueEvent;
+    private Event<UserNotification> issueEvent;
 
     public IssueService() {
         super(Issue.class);
@@ -37,7 +39,7 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
 
     @Override
     public Issue saveOrUpdate(Issue issue) {
-        issueEvent.fire(issue);
+        issueEvent.fire(new UserNotification(Collections.emptyList(),issue));
 
         return super.saveOrUpdate(issue);
     }
