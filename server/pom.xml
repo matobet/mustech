@@ -185,6 +185,11 @@
             <type>pom</type>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.spec.javax.batch</groupId>
+            <artifactId>jboss-batch-api_1.0_spec</artifactId>
+            <version>${batch.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
