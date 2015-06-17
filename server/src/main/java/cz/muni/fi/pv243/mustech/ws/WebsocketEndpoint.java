@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech.ws;
 
+import cz.muni.fi.pv243.mustech.model.BaseModel;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.Post;
 import cz.muni.fi.pv243.mustech.service.PrincipalChecker;
@@ -14,7 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.HashMap;
 import java.util.Map;
 
-@ServerEndpoint("/ws")
+@ServerEndpoint(value = "/ws", encoders = JsonEncoder.class)
 @Singleton
 public class WebsocketEndpoint {
 
@@ -41,20 +42,20 @@ public class WebsocketEndpoint {
 
     public void onIssue(@Observes Issue issue) {
         System.out.println("issue event!");
-        sessions.entrySet().stream()
-                .filter(session -> issueChecker.canAccess(session.getKey(), issue))
-                .forEach(session -> {
-                    // TODO: send actual issue
-                    session.getValue().getAsyncRemote().sendObject("new issue");
-                });
+        sendPushUpdate(issue, issueChecker);
     }
 
     public void onPost(@Observes Post post) {
+        System.out.println("post event!");
+        sendPushUpdate(post, postChecker);
+    }
+
+    /** sends via websocket newly created entity to users that can access it */
+    private <T extends BaseModel> void sendPushUpdate(T entity, PrincipalChecker<T> checker) {
         sessions.entrySet().stream()
-                .filter(session -> postChecker.canAccess(session.getKey(), post))
+                .filter(session -> checker.canAccess(session.getKey(), entity))
                 .forEach(session -> {
-                    // TODO: send actual post
-                    session.getValue().getAsyncRemote().sendObject("new post");
+                    session.getValue().getAsyncRemote().sendObject(entity);
                 });
     }
 }
