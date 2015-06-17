@@ -20,8 +20,8 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
     protected abstract R getRepository();
 
     @Override
-    public T saveOrUpdate(T t) {
-        return getRepository().save(t);
+    public void saveOrUpdate(T t) {
+        getRepository().save(t);
     }
 
     @Override

@@ -21,7 +21,7 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
     private IssueRepository issueRepository;
 
     @Inject
-    private Event<UserNotification> issueEvent;
+    private Event<Issue> issueEvent;
 
     public IssueService() {
         super(Issue.class);
@@ -38,9 +38,9 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
     }
 
     @Override
-    public Issue saveOrUpdate(Issue issue) {
-        issueEvent.fire(new UserNotification(Collections.emptyList(),issue));
+    public void saveOrUpdate(Issue issue) {
+        super.saveOrUpdate(issue);
 
-        return super.saveOrUpdate(issue);
+        issueEvent.fire(issue);
     }
 }

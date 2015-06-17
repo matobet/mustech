@@ -28,10 +28,10 @@ public class AnswerRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Answer save(@Valid Answer answer)
+    public void save(@Valid Answer answer)
     {
         answer.setId(null);
-        return answerService.saveOrUpdate(answer);
+        answerService.saveOrUpdate(answer);
     }
 
     @PUT

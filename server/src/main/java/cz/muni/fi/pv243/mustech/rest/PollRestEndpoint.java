@@ -29,10 +29,10 @@ public class PollRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Poll save(@Valid Poll poll)
+    public void save(@Valid Poll poll)
     {
         poll.setId(null);
-        return pollService.saveOrUpdate(poll);
+        pollService.saveOrUpdate(poll);
     }
 
     @PUT

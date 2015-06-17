@@ -29,10 +29,10 @@ public class OptionRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Option save(@Valid Option option)
+    public void save(@Valid Option option)
     {
         option.setId(null);
-        return optionService.saveOrUpdate(option);
+        optionService.saveOrUpdate(option);
     }
 
     @PUT

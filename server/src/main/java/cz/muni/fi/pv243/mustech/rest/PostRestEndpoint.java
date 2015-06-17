@@ -28,10 +28,10 @@ public class PostRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Post save(@Valid Post post)
+    public void save(@Valid Post post)
     {
         post.setId(null);
-        return postService.saveOrUpdate(post);
+        postService.saveOrUpdate(post);
     }
 
     @PUT

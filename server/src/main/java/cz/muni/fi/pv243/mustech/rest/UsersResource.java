@@ -37,9 +37,9 @@ public class UsersResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public User register(User user) {
+    public void register(User user) {
         user.setRole(RoleType.USER);
-        return userService.saveOrUpdate(user);
+        userService.saveOrUpdate(user);
     }
 
     @JsonRootName("users")

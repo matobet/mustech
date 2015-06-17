@@ -31,10 +31,10 @@ public class PostService extends AbstractGenericService<Post, PostRepository> im
     }
 
     @Override
-    public Post saveOrUpdate(Post post) {
-        postEvent.fire(post);
+    public void saveOrUpdate(Post post) {
+        super.saveOrUpdate(post);
 
-        return super.saveOrUpdate(post);
+        postEvent.fire(post);
     }
 
     @Override
