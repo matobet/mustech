@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from '../config/environment';
 import ApplicationRouteMixin from 'simple-auth/mixins/application-route-mixin';
 
 export default Ember.Route.extend(ApplicationRouteMixin, {
@@ -28,13 +29,23 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
   socketService: Ember.inject.service('websockets'),
 
-  activate() {
-    // TODO: propagate user credentials via websocket
-    let socket = this.get('socketService').socketFor(`ws://${window.location.host}${document.location.pathname.replace(/[^/]*$/, '')}ws`);
+  socket: null,
+
+  connect({identification, password}) {
+    let socket = this.get('socketService').socketFor(`ws://${identification}:${password}@${ENV.APP.WS_PATH}`);
+    this.set('socket', socket);
 
     socket.on('open', this.openHandler, this);
     socket.on('message', this.messageHandler, this);
     socket.on('close', this.closeHandler, this);
+  },
+
+  disconnect() {
+    let socket = this.get('socket');
+    if (socket) {
+      socket.close();
+      this.set('socket', null);
+    }
   },
 
   openHandler() {

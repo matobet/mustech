@@ -38,6 +38,7 @@
       <url-pattern>/api/login</url-pattern>
       <url-pattern>/api/logout</url-pattern>
       <url-pattern>/api/*</url-pattern>
+      <url-pattern>/ws</url-pattern>
     </web-resource-collection>
     <auth-constraint>
       <role-name>ADMIN</role-name>
