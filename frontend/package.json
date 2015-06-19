@@ -25,6 +25,7 @@
     "ember-cli": "latest",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-babel": "^5.0.0",
+    "ember-cli-bootstrap-datepicker": "0.5.3",
     "ember-cli-content-security-policy": "0.4.0",
     "ember-cli-dependency-checker": "0.0.8",
     "ember-cli-htmlbars": "0.7.4",
@@ -38,6 +39,7 @@
     "ember-data": "1.0.0-beta.19.1",
     "ember-export-application-global": "^1.0.2",
     "ember-handlebars": "^1.2.0",
+    "ember-moment": "1.2.1",
     "ember-notify": "^3.3.1",
     "ember-websockets": "1.0.6",
     "phantomjs": "^1.9.16"

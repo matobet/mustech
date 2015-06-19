@@ -16,6 +16,8 @@
     "bootstrap": "~3.3.4",
     "bootstrap-material-design": "~0.3.0",
     "arrive": "~2.2.0",
-    "uri.js": "~1.15.1"
+    "uri.js": "~1.15.1",
+    "bootstrap-datepicker": "~1.4.0",
+    "ember-cli-moment-shim": "~0.2.0"
   }
 }
