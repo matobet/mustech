@@ -40,8 +40,7 @@ public class IssueRestEndpoint {
 
     @GET
     @Path("/{id}")
-    public Issue getById(@PathParam("id") Long id)
-    {
+    public Issue getById(@PathParam("id") Long id) {
         log.info("Getting: " + id);
         return issueService.findById(id);
     }
@@ -51,17 +50,15 @@ public class IssueRestEndpoint {
     public void save(@Context HttpServletRequest req, @Valid Issue issue) {
         issue.setCreatedBy(userService.findByEmail(req.getUserPrincipal().getName()));
         issue.setCreatedAt(new Date());
-        // TODO: right now just dummy date
-        issue.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
         issue.setId(null);
+
         issueService.saveOrUpdate(issue);
     }
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(@PathParam("id") Long id, @Valid Issue issue)
-    {
+    public void update(@PathParam("id") Long id, @Valid Issue issue) {
         issue.setId(id);
         issueService.saveOrUpdate(issue);
     }

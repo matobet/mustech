@@ -1,4 +1,5 @@
-{{#object-form action="save" submitBtnLabel="Create"}}
+{{#object-form legend="New Event" action="save" submitBtnLabel="Create"}}
   {{form-field label="Name" type="text" value=name placeholder="Name" autofocus="autofocus"}}
-  {{form-textarea label="Description" rows="5" cols="80" value=description}}
+  {{form-textarea label="Description" rows="2" cols="80" value=description placeholder="Description"}}
+  {{form-datepicker label="End of Voting" value=expiresAt format="dd.MM yyyy"}}
 {{/object-form}}
