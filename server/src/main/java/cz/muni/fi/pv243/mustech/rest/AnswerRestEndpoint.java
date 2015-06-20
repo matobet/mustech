@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.rest;
 import cz.muni.fi.pv243.mustech.model.Answer;
 import cz.muni.fi.pv243.mustech.service.AnswerService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ public class AnswerRestEndpoint {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     public Answer getById(@PathParam("id") Long id)
     {
         return answerService.findById(id);
@@ -28,6 +30,7 @@ public class AnswerRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void save(@Valid Answer answer)
     {
         answer.setId(null);
@@ -37,6 +40,7 @@ public class AnswerRestEndpoint {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void update(@PathParam("id") Long id, @Valid Answer answer)
     {
         answer.setId(id);
@@ -45,6 +49,7 @@ public class AnswerRestEndpoint {
 
     @DELETE
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     @Consumes(MediaType.APPLICATION_JSON)
     public void delete(@PathParam("id") Long id)
     {

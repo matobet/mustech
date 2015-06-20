@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.mustech.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.security.PermitAll;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,7 @@ public class LoginEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
+    @PermitAll
     public Response login(@Context HttpServletRequest req, @Context HttpServletResponse response) throws IOException, ServletException {
         boolean authenticated = req.authenticate(response);
         log.info("logging in: " + req.getUserPrincipal() + " with success: " + authenticated);

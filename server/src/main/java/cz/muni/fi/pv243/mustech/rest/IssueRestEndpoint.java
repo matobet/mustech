@@ -7,6 +7,7 @@ import cz.muni.fi.pv243.mustech.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -39,6 +40,7 @@ public class IssueRestEndpoint {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     public Issue getById(@PathParam("id") Long id) {
         log.debug("Getting: " + id);
         return issueService.findById(id);
@@ -46,6 +48,7 @@ public class IssueRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void save(@Context HttpServletRequest req, @Valid Issue issue) {
         issue.setCreatedBy(userService.findByEmail(req.getUserPrincipal().getName()));
         issue.setCreatedAt(new Date());
@@ -57,6 +60,7 @@ public class IssueRestEndpoint {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void update(@PathParam("id") Long id, @Valid Issue issue) {
         issue.setId(id);
         issueService.saveOrUpdate(issue);
@@ -65,6 +69,7 @@ public class IssueRestEndpoint {
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void delete(@PathParam("id") Long id)
     {
         issueService.delete(id);
