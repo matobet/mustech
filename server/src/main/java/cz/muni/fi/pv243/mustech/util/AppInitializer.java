@@ -1,8 +1,6 @@
 package cz.muni.fi.pv243.mustech.util;
 
-import cz.muni.fi.pv243.mustech.model.Issue;
-import cz.muni.fi.pv243.mustech.model.RoleType;
-import cz.muni.fi.pv243.mustech.model.User;
+import cz.muni.fi.pv243.mustech.model.*;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.UserService;
 import org.joda.time.LocalDate;
@@ -11,6 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 
 @Startup
@@ -49,7 +51,26 @@ public class AppInitializer {
         dinner.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
         dinner.setCreatedBy(userService.findByEmail("user@user.cz"));
+        dinner.setPolls(initDemoPolls(dinner));
 
         issueService.saveOrUpdate(dinner);
     }
+
+    private List<Poll> initDemoPolls(Issue issue) {
+        Poll poll = new Poll();
+        poll.setQuestion("K5 Steak House");
+
+        Option yes = new Option();
+        yes.setValue("Yes");
+        yes.setPoll(poll);
+        Option no = new Option();
+        no.setValue("No");
+        no.setPoll(poll);
+
+        poll.setOptions(asList(yes, no));
+        poll.setIssue(issue);
+
+        return Collections.singletonList(poll);
+    }
+
 }

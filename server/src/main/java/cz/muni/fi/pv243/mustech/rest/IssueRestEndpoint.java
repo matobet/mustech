@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.UserService;
-import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,7 +40,7 @@ public class IssueRestEndpoint {
     @GET
     @Path("/{id}")
     public Issue getById(@PathParam("id") Long id) {
-        log.info("Getting: " + id);
+        log.debug("Getting: " + id);
         return issueService.findById(id);
     }
 
