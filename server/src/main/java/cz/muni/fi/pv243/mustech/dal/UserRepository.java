@@ -6,7 +6,5 @@ import org.apache.deltaspike.data.api.Repository;
 
 @Repository
 public interface UserRepository extends EntityRepository<User, Long> {
-
-    User findById(Long id);
-    User findByEmail(String name);
+    User findByEmail(String email);
 }
