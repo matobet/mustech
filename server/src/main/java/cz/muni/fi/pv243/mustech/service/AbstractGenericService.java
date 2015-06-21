@@ -34,7 +34,7 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
     {
         if(id == null || id <= 0)
         {
-            throw new IllegalArgumentException("Id must be posotive.");
+            throw new IllegalArgumentException("Id must be positive.");
         }
 
         getRepository().remove(getRepository().findBy(id));
@@ -45,14 +45,11 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
     {
         if(id == null || id <= 0)
         {
-            throw new IllegalArgumentException("Id must be posotive.");
+            throw new IllegalArgumentException("Id must be positive.");
         }
-
         return getRepository().findBy(id);
     }
 
     @Override
-    public List<T> findAll() {
-        return getRepository().findAll();
-    }
+    public List<T> findAll() { return getRepository().findAll(); }
 }

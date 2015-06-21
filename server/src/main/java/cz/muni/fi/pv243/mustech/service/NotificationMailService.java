@@ -4,10 +4,7 @@ import cz.muni.fi.pv243.mustech.model.NotificationMessage;
 
 import javax.annotation.Resource;
 import javax.ejb.Stateless;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -18,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 @Stateless
 public class NotificationMailService {
 
-    @Resource(name = "mail/myMailSession")
+    @Resource(name = "java:/mail/myMailSession")
     private Session mailSession;
 
     public void sendEmail(String to, String subject, String message)
@@ -26,12 +23,11 @@ public class NotificationMailService {
         try
         {
             MimeMessage mimeMessage = new MimeMessage(mailSession);
-            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
             mimeMessage.setSubject(subject);
             mimeMessage.setText(message);
 
             Transport.send(mimeMessage);
-
         } catch (AddressException e) {
             e.printStackTrace();
         } catch (MessagingException e)
@@ -43,6 +39,5 @@ public class NotificationMailService {
     public void sendEmail(NotificationMessage message)
     {
         sendEmail(message.getDestination(), message.getSubject(), message.getMessage());
-        System.out.println("Sending mail to: " + message.getDestination());
     }
 }
