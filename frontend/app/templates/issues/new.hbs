@@ -2,4 +2,19 @@
   {{form-field label="Name" type="text" value=name placeholder="Name" autofocus="autofocus"}}
   {{form-textarea label="Description" rows="2" cols="80" value=description placeholder="Description"}}
   {{form-datepicker label="End of Voting" value=expiresAt format="dd.MM yyyy"}}
+  {{#poll-field legend="Initial Proposition"}}
+    {{#each option in options}}
+        <div class="row">
+            <div class="col-lg-11">
+              {{form-field label=option.label type="text" value=option.question placeholder=option.label}}
+            </div>
+            <div class="col-lg-1">
+                <button {{action 'removePollOption' option}} class="btn btn-sm btn-material-red"><i class="mdi-content-remove"></i></button>
+            </div>
+        </div>
+    {{/each}}
+    <div class="col-lg-offset-2">
+        <button {{action 'addPollOption'}} class="btn btn-sm btn-material-orange"><i class="mdi-content-add"></i></button>
+    </div>
+  {{/poll-field}}
 {{/object-form}}
