@@ -13,7 +13,7 @@ import java.util.*;
 
 @Entity(name = "USERS")
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(exclude = {"issues"}, callSuper = true)
 @JsonRootName("user")
 public class User extends BaseModel {
 
@@ -41,30 +41,5 @@ public class User extends BaseModel {
 
     public void setPassword(String password) {
         this.password = DigestUtils.md5Hex(password);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        User user = (User) o;
-
-        if (!name.equals(user.name)) return false;
-        if (!email.equals(user.email)) return false;
-        if (!password.equals(user.password)) return false;
-        return role == user.role;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + email.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + role.hashCode();
-        return result;
     }
 }
