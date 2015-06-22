@@ -7,15 +7,13 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"polls", "posts", "concernedUsers"}, callSuper = true)
 @JsonRootName("issue")
 public class Issue extends BaseModel {
-
     @Column(nullable = false)
     @Size(min = 1, max = 255)
     private String name;
@@ -43,4 +41,17 @@ public class Issue extends BaseModel {
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
     private List<Post> posts;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "UsersIssues",
+//            joinColumns = {
+//                    @JoinColumn(name = "idIssue", nullable = false, updatable = false)
+//            },
+//            inverseJoinColumns = {
+//                    @JoinColumn(name = "idUser", nullable = false, updatable = false)
+//            }
+//    )
+    @JsonIdentityReference(alwaysAsId = true)
+    private Set<User> concernedUsers = new HashSet<>();
 }

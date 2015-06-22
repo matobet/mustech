@@ -1,0 +1,34 @@
+connect
+batch
+
+# add mail session
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=MyMailSMTP:add( \
+host=smtp.gmail.com, \
+port=465)
+
+/subsystem=mail/mail-session=MyMailSession:add(jndi-name="java:/mail/myMailSession", from="jane.doe@gmail.example.com", debug=true)
+
+/subsystem=mail/mail-session=MyMailSession/server=smtp:add( \
+outbound-socket-binding-ref=MyMailSMTP, \
+ssl=true, \
+username=jane.doe@gmail.example.com, \
+password=***)
+
+# add security domain
+ 
+/subsystem=security/security-domain=MustechDomain:add(cache-type=default)
+ 
+/subsystem=security/security-domain=MustechDomain/authentication=classic :add(login-modules=[{"code"=>"Database", "flag"=>"required", \
+ "module-options"=>[\
+      ("multi-threaded"=>"true"),\
+      ("unauthenticatedIdentity"=>"guest"),\
+      ("password-stacking"=>"useFirstPass"),\
+      ("hashAlgorithm"=>"MD5"),\
+      ("hashEncoding"=>"hex"),\
+      ("hashCharset"=>"UTF-8"),\
+      ("dsJndiName"=>"java:jboss\/datasources\/ExampleDS"),\
+      ("principalsQuery"=>"SELECT password FROM USERS WHERE email=?"),\
+      ("rolesQuery"=>"SELECT role, 'Roles' FROM USERS WHERE email=?")]}])
+ 
+# Execute
+run-batch

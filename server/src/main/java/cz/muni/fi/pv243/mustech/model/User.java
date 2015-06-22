@@ -1,20 +1,19 @@
 package cz.muni.fi.pv243.mustech.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.validator.constraints.Email;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.*;
 
 @Entity(name = "USERS")
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(exclude = {"issues"}, callSuper = true)
 @JsonRootName("user")
 public class User extends BaseModel {
 
@@ -36,8 +35,11 @@ public class User extends BaseModel {
     @Column(nullable = false)
     private RoleType role;
 
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "concernedUsers")
+    @JsonIdentityReference(alwaysAsId = true)
+    private Set<Issue> issues = new HashSet<>();
+
     public void setPassword(String password) {
         this.password = DigestUtils.md5Hex(password);
     }
-
 }
