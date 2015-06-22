@@ -1,14 +1,19 @@
-{{#each issue in model}}
-    <li>Name: {{issue.name}}</li>
-    <li>Description: {{issue.description}}</li>
-    <li>Created by: {{issue.createdBy.email}}</li>
-    <li>Created at: {{moment issue.createdAt 'DD.MMMM YYYY'}}</li>
-    <li>Expires at: {{moment issue.expiresAt 'DD.MMMM YYYY'}}</li>
-    <li>POLLS:</li>
-    {{#each poll in issue.polls}}
-        <li>Question: {{poll.question}}</li>
-        {{#each option in poll.options}}
-            <li>Option: {{option.value}}</li>
-        {{/each}}
-    {{/each}}
-{{/each}}
+<ul class="list-group">
+  {{#each issue in model}}
+      <li class="list-group-item pull-left shadow-z-2">
+          <a href="#">
+              <div>
+                  <div class="issue-top-info">
+                      <h4>{{issue.name}}</h4>
+                      <p>{{issue.description}}</p>
+                  </div>
+                  <div class="issue-bottom-info">
+                      <div class="pull-left"># participants: X</div>
+                      <div class="pull-right">End: {{moment issue.expiresAt 'DD.MM.YYYY'}}</div>
+                  </div>
+              </div>
+          </a>
+      </li>
+  {{/each}}
+</ul>
+<br/>
