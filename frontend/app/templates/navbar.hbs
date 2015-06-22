@@ -3,11 +3,18 @@
         <div class="navbar-header">
           {{#link-to 'index' class="navbar-brand"}}Mustech{{/link-to}}
         </div>
-        <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
                 <li>{{#link-to 'users'}}Users{{/link-to}}</li>
               {{#if session.isAuthenticated}}
-                  <li>{{#link-to 'issues'}}Events <span class="badge">{{numberOfActiveEvents}}</span>{{/link-to}}</li>
+                  <li class="dropdown">
+                    {{#link-to 'issues' classNames='dropdown-toggle' data-toggle="dropdown"}}
+                        Events <span class="badge">{{numberOfActiveEvents}}</span> <b class="caret"></b>
+                    {{/link-to}}
+                      <ul class="dropdown-menu">
+                          <li>{{#link-to 'issues.new'}}New{{/link-to}}</li>
+                      </ul>
+                  </li>
               {{/if}}
             </ul>
             <div id="login-form" class="navbar-right">
