@@ -28,8 +28,6 @@ public class NotificationMailService {
             mimeMessage.setText(message);
 
             Transport.send(mimeMessage);
-        } catch (AddressException e) {
-            e.printStackTrace();
         } catch (MessagingException e)
         {
             e.printStackTrace();

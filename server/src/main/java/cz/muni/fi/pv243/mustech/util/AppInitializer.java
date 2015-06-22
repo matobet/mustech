@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.util;
 import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.model.*;
 import cz.muni.fi.pv243.mustech.service.IssueService;
+import cz.muni.fi.pv243.mustech.service.PollService;
 import cz.muni.fi.pv243.mustech.service.UserService;
 import org.joda.time.LocalDate;
 
@@ -21,8 +22,12 @@ public class AppInitializer {
 
     @Inject
     private UserService userService;
+
     @Inject
     private IssueService issueService;
+
+    @Inject
+    private PollService pollService;
 
     @PostConstruct
     private void initUsers() {
@@ -53,16 +58,16 @@ public class AppInitializer {
         dinner.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
         dinner.setCreatedBy(u);
-        dinner.setPolls(initDemoPolls(dinner));
 
-//        issueService.addConcernedUser(dinner.getId(), u.getId());
+        Poll poll = initDemoPoll(dinner);
+        pollService.saveOrUpdate(poll);
 
         issueService.saveOrUpdate(dinner);
-
+        issueService.addConcernedUser(dinner.getId(), u.getId());
 
     }
 
-    private List<Poll> initDemoPolls(Issue issue) {
+    private Poll initDemoPoll(Issue issue) {
         Poll poll = new Poll();
         poll.setQuestion("K5 Steak House");
 
@@ -76,7 +81,7 @@ public class AppInitializer {
         poll.setOptions(asList(yes, no));
         poll.setIssue(issue);
 
-        return Collections.singletonList(poll);
+        return poll;
     }
 
 }
