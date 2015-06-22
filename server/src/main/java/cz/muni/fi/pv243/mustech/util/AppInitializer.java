@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.mustech.util;
 
+import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.model.*;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.UserService;
@@ -13,7 +14,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-
 
 @Startup
 @Singleton
@@ -46,14 +46,20 @@ public class AppInitializer {
 
     private void initDemoIssues() {
         Issue dinner = new Issue();
+        User u = userService.findByEmail("user@user.cz");
+
         dinner.setName("Dinner");
         dinner.setDescription("Where should we go eat?");
         dinner.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
-        dinner.setCreatedBy(userService.findByEmail("user@user.cz"));
+        dinner.setCreatedBy(u);
         dinner.setPolls(initDemoPolls(dinner));
 
+//        issueService.addConcernedUser(dinner.getId(), u.getId());
+
         issueService.saveOrUpdate(dinner);
+
+
     }
 
     private List<Poll> initDemoPolls(Issue issue) {

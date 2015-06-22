@@ -1,6 +1,7 @@
 package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
+import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.User;
 
 import javax.inject.Inject;
