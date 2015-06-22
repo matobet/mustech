@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.Poll;
 import cz.muni.fi.pv243.mustech.service.PollService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class PollRestEndpoint {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     public Poll getById(@PathParam("id") Long id)
     {
         return pollService.findById(id);
@@ -29,6 +31,7 @@ public class PollRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void save(@Valid Poll poll)
     {
         poll.setId(null);
@@ -38,6 +41,7 @@ public class PollRestEndpoint {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void update(@PathParam("id") Long id, @Valid Poll poll)
     {
         poll.setId(id);
@@ -47,6 +51,7 @@ public class PollRestEndpoint {
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void delete(@PathParam("id") Long id)
     {
         pollService.delete(id);

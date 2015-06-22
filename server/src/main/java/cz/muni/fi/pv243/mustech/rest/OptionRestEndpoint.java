@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.Option;
 import cz.muni.fi.pv243.mustech.service.OptionService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ public class OptionRestEndpoint {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     public Option getById(@PathParam("id") Long id)
     {
         return optionService.findById(id);
@@ -29,6 +31,7 @@ public class OptionRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void save(@Valid Option option)
     {
         option.setId(null);
@@ -38,6 +41,7 @@ public class OptionRestEndpoint {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void update(@PathParam("id") Long id, @Valid Option option)
     {
         option.setId(id);
@@ -47,6 +51,7 @@ public class OptionRestEndpoint {
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void delete(@PathParam("id") Long id)
     {
         optionService.delete(id);

@@ -1,6 +1,8 @@
 /* global require, module */
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var mergeTrees = require('broccoli-merge-trees');
+var pickFiles = require('broccoli-static-compiler');
 
 var app = new EmberApp();
 
@@ -14,4 +16,10 @@ app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/material.min.js');
 app.import('bower_components/bootstrap-material-design/dist/js/ripples.min.js');
 
-module.exports = app.toTree();
+var extraAssets = pickFiles('bower_components/bootstrap-material-design/fonts',{
+  srcDir: '/',
+  files: ['**/*'],
+  destDir: '/fonts'
+});
+
+module.exports = mergeTrees([app.toTree(), extraAssets]);

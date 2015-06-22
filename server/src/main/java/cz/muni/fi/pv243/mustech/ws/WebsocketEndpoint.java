@@ -12,8 +12,8 @@ import javax.websocket.OnClose;
 import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 @ServerEndpoint(value = "/ws", encoders = JsonEncoder.class)
 @Singleton
@@ -26,7 +26,7 @@ public class WebsocketEndpoint {
     private PrincipalChecker<Post> postChecker;
 
     /** map from connected user principals to websocket sessions */
-    private Map<String, Session> sessions = new HashMap<>();
+    private ConcurrentMap<String, Session> sessions = new ConcurrentHashMap<>();
 
     @OnOpen
     public void onOpen(Session session) {

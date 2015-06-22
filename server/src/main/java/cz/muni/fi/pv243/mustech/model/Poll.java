@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -26,11 +23,11 @@ public class Poll extends BaseModel {
     @JsonIdentityReference(alwaysAsId = true)
     private Issue issue;
 
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(mappedBy = "poll")
     private List<Option> options;
 
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
-    @OneToMany(mappedBy = "poll")
     private List<Answer> answers;
 }

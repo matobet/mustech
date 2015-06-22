@@ -31,6 +31,6 @@ public class NotificationEventObserver {
         return "Hi, "
                 + issue.getCreatedBy().getName()
                 + " want to know your opinion about " + issue.getName()
-                + ". To response, please visit the link below.";
+                + ". For response, please visit the web page.";
     }
 }

@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.rest;
 import cz.muni.fi.pv243.mustech.model.Post;
 import cz.muni.fi.pv243.mustech.service.PostService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -21,6 +22,7 @@ public class PostRestEndpoint {
 
     @GET
     @Path("/{id}")
+    @RolesAllowed({"admin","user"})
     public Post getById(@PathParam("id") Long id)
     {
         return postService.findById(id);
@@ -28,6 +30,7 @@ public class PostRestEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void save(@Valid Post post)
     {
         post.setId(null);
@@ -37,6 +40,7 @@ public class PostRestEndpoint {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void update(@PathParam("id") Long id, @Valid Post post)
     {
         post.setId(id);
@@ -46,6 +50,7 @@ public class PostRestEndpoint {
     @DELETE
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
+    @RolesAllowed({"admin","user"})
     public void delete(@PathParam("id") Long id)
     {
         postService.delete(id);

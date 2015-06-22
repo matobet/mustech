@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.security.PermitAll;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.POST;
@@ -20,6 +21,7 @@ public class LogoutEndpoint {
     private final Logger log = LoggerFactory.getLogger(LogoutEndpoint.class);
 
     @POST
+    @PermitAll
     public Response logout(@Context HttpServletRequest req) throws URISyntaxException {
         try {
             log.info(req.getRemoteUser() + " is trying to logout");
