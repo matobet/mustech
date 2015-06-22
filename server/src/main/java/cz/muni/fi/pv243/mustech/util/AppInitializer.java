@@ -54,6 +54,33 @@ public class AppInitializer {
         dinner.setPolls(initDemoPolls(dinner));
 
         issueService.saveOrUpdate(dinner);
+
+        Issue game = new Issue();
+        game.setName("Game Evening");
+        game.setDescription("What are we gonna play?");
+        game.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        game.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        game.setCreatedBy(userService.findByEmail("user@user.cz"));
+
+        issueService.saveOrUpdate(game);
+
+        Issue holiday = new Issue();
+        holiday.setName("Summer Holiday");
+        holiday.setDescription("Turkey, Bali Bali, ...");
+        holiday.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        holiday.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        holiday.setCreatedBy(userService.findByEmail("user@user.cz"));
+
+        issueService.saveOrUpdate(holiday);
+
+        Issue trip = new Issue();
+        trip.setName("School Trip");
+        trip.setDescription("Cabine in da woods?");
+        trip.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        trip.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        trip.setCreatedBy(userService.findByEmail("user@user.cz"));
+
+        issueService.saveOrUpdate(trip);
     }
 
     private List<Poll> initDemoPolls(Issue issue) {
