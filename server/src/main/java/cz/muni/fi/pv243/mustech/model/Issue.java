@@ -7,15 +7,13 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
 @EqualsAndHashCode(callSuper = true)
 @JsonRootName("issue")
 public class Issue extends BaseModel {
-
     @Column(nullable = false)
     @Size(min = 1, max = 255)
     private String name;
@@ -43,4 +41,8 @@ public class Issue extends BaseModel {
     @OneToMany(mappedBy = "issue")
     @JsonIdentityReference(alwaysAsId = true)
     private List<Post> posts;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIdentityReference(alwaysAsId = true)
+    private List<User> concernedUsers = new ArrayList<>();
 }
