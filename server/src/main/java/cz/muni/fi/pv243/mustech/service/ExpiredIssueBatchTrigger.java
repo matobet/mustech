@@ -14,7 +14,7 @@ import java.util.Properties;
 public class ExpiredIssueBatchTrigger
 {
     @PostConstruct
-    @Schedule(dayOfMonth = "Sun",persistent = false)
+    @Schedule(dayOfWeek = "Sun",persistent = false)
     public void runBatch()
     {
         JobOperator jo = BatchRuntime.getJobOperator();

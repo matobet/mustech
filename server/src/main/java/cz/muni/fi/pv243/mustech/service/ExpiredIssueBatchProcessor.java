@@ -24,9 +24,9 @@ public class ExpiredIssueBatchProcessor implements ItemProcessor {
             Issue issue = (Issue)o;
 
             Calendar afterExpiration = Calendar.getInstance();
-            afterExpiration.add(Calendar.MONTH, 1);
+            afterExpiration.add(Calendar.MONTH, -1);
 
-            if(issue.getExpiresAt().after(afterExpiration.getTime()))
+            if(issue.getExpiresAt().before(afterExpiration.getTime()))
             {
                 return issue;
             }
