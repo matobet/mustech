@@ -5,6 +5,7 @@ import cz.muni.fi.pv243.mustech.model.User;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 /**
@@ -27,6 +28,17 @@ public class UserService extends AbstractGenericService<User, UserRepository> {
     }
 
     public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
+        if(email == null)
+        {
+            throw new IllegalArgumentException("email cannot be null");
+        }
+
+        try
+        {
+            return userRepository.findByEmail(email);
+        } catch (NoResultException e)
+        {
+            return null;
+        }
     }
 }

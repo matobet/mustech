@@ -10,12 +10,14 @@ import cz.muni.fi.pv243.mustech.service.UserService;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.arquillian.junit.InSequence;
 import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -24,6 +26,7 @@ import java.io.File;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(Arquillian.class)
 public class UserServiceIntegrationTest {
@@ -54,7 +57,8 @@ public class UserServiceIntegrationTest {
 
     @Test
     @Transactional
-    public void testSave() {
+    @InSequence(1)
+    public void testSaveAndGet() {
         User admin = new User();
         admin.setName("admin");
         admin.setPassword("123456");
@@ -65,5 +69,81 @@ public class UserServiceIntegrationTest {
 
         assertThat(admin.getId(), not(nullValue()));
         assertThat(userService.findById(admin.getId()), is(equalTo(admin)));
+    }
+
+    @Test
+    @Transactional
+    @InSequence(2)
+    public void testUpdate() {
+        User admin = userService.findByEmail("admin@admin.cz");
+        admin.setName("user");
+        admin.setPassword("123");
+        admin.setRole(RoleType.USER);
+
+        userService.saveOrUpdate(admin);
+
+        assertThat(userService.findById(admin.getId()), is(equalTo(admin)));
+    }
+
+    @Test
+    @Transactional
+    @InSequence(3)
+    public void testFindByEmail() {
+        User admin = userService.findByEmail("admin@admin.cz");
+
+        assertTrue(userService.findById(admin.getId()) != null);
+    }
+
+    @Test
+    @Transactional
+    @InSequence(4)
+    public void testDelete() {
+        User admin = userService.findByEmail("admin@admin.cz");
+
+        userService.delete(admin.getId());
+
+        assertTrue(userService.findById(admin.getId()) == null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindWithNullId()
+    {
+        userService.findById(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindWithNegativeId()
+    {
+        userService.findById(-1L);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testFindWithNullEmail()
+    {
+        userService.findByEmail(null);
+    }
+
+    @Test
+    public void testFindWithFakeEmail()
+    {
+        Assert.assertNull(userService.findByEmail("123"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSaveorUpdateWithNullArg()
+    {
+        userService.saveOrUpdate(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteWithNullId()
+    {
+        userService.delete(null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteWithNegativeId()
+    {
+        userService.findById(-1L);
     }
 }
