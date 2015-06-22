@@ -50,7 +50,7 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
 
     public void addConcernedUser(Long issueId, Long userId){
         Issue issue = issueRepository.findBy(issueId);
-        User user = userRepository.findById(userId);
+        User user = userRepository.findBy(userId);
 
         issue.getConcernedUsers().add(user);
         user.getIssues().add(issue);
@@ -60,7 +60,7 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
 
     public void removeConcernedUser(Long issueId, Long userId){
         Issue issue = issueRepository.findBy(issueId);
-        User user = userRepository.findById(userId);
+        User user = userRepository.findBy(userId);
         
         issue.getConcernedUsers().remove(user);
         user.getIssues().remove(issue);

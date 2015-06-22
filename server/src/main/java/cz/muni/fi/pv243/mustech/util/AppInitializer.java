@@ -52,12 +52,14 @@ public class AppInitializer {
         dinner.setDescription("Where should we go eat?");
         dinner.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
-        dinner.setCreatedBy(userService.findByEmail("user@user.cz"));
+        dinner.setCreatedBy(u);
         dinner.setPolls(initDemoPolls(dinner));
+
+//        issueService.addConcernedUser(dinner.getId(), u.getId());
 
         issueService.saveOrUpdate(dinner);
 
-        issueService.addConcernedUser(dinner.getId(), u.getId());
+
     }
 
     private List<Poll> initDemoPolls(Issue issue) {
