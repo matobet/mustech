@@ -34,7 +34,7 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      API_PATH: 'api',
+      API_PATH: 'mustech/api',
       //API_SERVER: 'http://localhost:8080/mustech',
       WS_PATH: 'localhost:8080/mustech/ws'
     }
