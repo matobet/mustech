@@ -9,7 +9,6 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Issue service implementing and initializing generic service and own methods
@@ -20,22 +19,10 @@ import java.util.List;
 public class IssueService extends AbstractGenericService<Issue, IssueRepository> implements PrincipalChecker<Issue> {
 
     @Inject
-    private IssueRepository issueRepository;
-
-    @Inject
     private UserRepository userRepository;
 
     @Inject
     private Event<Issue> issueEvent;
-
-    public IssueService() {
-        super(Issue.class);
-    }
-
-    @Override
-    protected IssueRepository getRepository() {
-        return issueRepository;
-    }
 
     @Override
     public boolean canAccess(String principalName, Issue issue) {
@@ -50,22 +37,22 @@ public class IssueService extends AbstractGenericService<Issue, IssueRepository>
     }
 
     public void addConcernedUser(Long issueId, Long userId){
-        Issue issue = issueRepository.findBy(issueId);
+        Issue issue = repository.findBy(issueId);
         User user = userRepository.findBy(userId);
 
         issue.getConcernedUsers().add(user);
         user.getIssues().add(issue);
-        issueRepository.save(issue);
+        repository.save(issue);
         userRepository.save(user);
     }
 
     public void removeConcernedUser(Long issueId, Long userId){
-        Issue issue = issueRepository.findBy(issueId);
+        Issue issue = repository.findBy(issueId);
         User user = userRepository.findBy(userId);
-        
+
         issue.getConcernedUsers().remove(user);
         user.getIssues().remove(issue);
-        issueRepository.save(issue);
+        repository.save(issue);
         userRepository.save(user);
     }
 }

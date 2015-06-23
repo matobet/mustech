@@ -14,16 +14,4 @@ import javax.transaction.Transactional;
 @Named
 @Transactional
 public class AnswerService extends AbstractGenericService<Answer, AnswerRepository> {
-
-    @Inject
-    private AnswerRepository answerRepository;
-
-    public AnswerService() {
-        super(Answer.class);
-    }
-
-    @Override
-    protected AnswerRepository getRepository() {
-        return answerRepository;
-    }
 }

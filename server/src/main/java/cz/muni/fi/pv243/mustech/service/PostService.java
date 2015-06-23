@@ -17,19 +17,7 @@ import javax.transaction.Transactional;
 public class PostService extends AbstractGenericService<Post, PostRepository> implements PrincipalChecker<Post> {
 
     @Inject
-    private PostRepository postRepository;
-
-    @Inject
     private Event<Post> postEvent;
-
-    public PostService() {
-        super(Post.class);
-    }
-
-    @Override
-    protected PostRepository getRepository() {
-        return postRepository;
-    }
 
     @Override
     public void saveOrUpdate(Post post) {

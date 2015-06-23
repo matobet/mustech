@@ -14,16 +14,4 @@ import javax.transaction.Transactional;
 @Named
 @Transactional
 public class PollService extends AbstractGenericService<Poll, PollRepository> {
-
-    @Inject
-    private PollRepository pollRepository;
-
-    public PollService() {
-        super(Poll.class);
-    }
-
-    @Override
-    protected PollRepository getRepository() {
-        return pollRepository;
-    }
 }

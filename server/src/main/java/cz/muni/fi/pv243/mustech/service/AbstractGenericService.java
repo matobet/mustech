@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.service;
 
 import org.apache.deltaspike.data.api.EntityRepository;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -13,12 +14,8 @@ import java.util.List;
 @Transactional
 public abstract class AbstractGenericService<T, R extends EntityRepository<T, Long>> implements GenericService<T> {
 
-    private Class<T> tClass;
-
-    public AbstractGenericService(Class<T> tClass) {
-    }
-
-    protected abstract R getRepository();
+    @Inject
+    protected R repository;
 
     @Override
     public void saveOrUpdate(T t)
@@ -27,7 +24,7 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
         {
             throw new IllegalArgumentException("Entity is null.");
         }
-        getRepository().save(t);
+        repository.save(t);
     }
 
     @Override
@@ -38,7 +35,7 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
             throw new IllegalArgumentException("Id must be positive.");
         }
 
-        getRepository().remove(getRepository().findBy(id));
+        repository.remove(repository.findBy(id));
     }
 
     @Override
@@ -48,9 +45,9 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
         {
             throw new IllegalArgumentException("Id must be positive.");
         }
-        return getRepository().findBy(id);
+        return repository.findBy(id);
     }
 
     @Override
-    public List<T> findAll() { return getRepository().findAll(); }
+    public List<T> findAll() { return repository.findAll(); }
 }
