@@ -2,7 +2,6 @@ package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.User;
-import cz.muni.fi.pv243.mustech.util.UserNotification;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
