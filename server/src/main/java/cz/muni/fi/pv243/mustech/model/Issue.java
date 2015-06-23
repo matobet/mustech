@@ -7,7 +7,10 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -42,16 +45,7 @@ public class Issue extends BaseModel {
     @JsonIdentityReference(alwaysAsId = true)
     private List<Post> posts;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "UsersIssues",
-//            joinColumns = {
-//                    @JoinColumn(name = "idIssue", nullable = false, updatable = false)
-//            },
-//            inverseJoinColumns = {
-//                    @JoinColumn(name = "idUser", nullable = false, updatable = false)
-//            }
-//    )
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
     private Set<User> concernedUsers = new HashSet<>();
 }

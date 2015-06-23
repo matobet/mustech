@@ -1,6 +1,5 @@
 package cz.muni.fi.pv243.mustech.util;
 
-import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.model.*;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.PollService;
@@ -11,8 +10,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.util.Collections;
-import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -51,19 +48,55 @@ public class AppInitializer {
 
     private void initDemoIssues() {
         Issue dinner = new Issue();
-        User u = userService.findByEmail("user@user.cz");
+        User user = userService.findByEmail("user@user.cz");
 
         dinner.setName("Dinner");
         dinner.setDescription("Where should we go eat?");
         dinner.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
-        dinner.setCreatedBy(u);
+        dinner.setCreatedBy(user);
 
         Poll poll = initDemoPoll(dinner);
         pollService.saveOrUpdate(poll);
 
         issueService.saveOrUpdate(dinner);
-        issueService.addConcernedUser(dinner.getId(), u.getId());
+        issueService.addConcernedUser(dinner.getId(), user.getId());
+
+        Issue game = new Issue();
+        game.setName("Game Evening");
+        game.setDescription("What are we gonna play?");
+        game.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        game.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        game.setCreatedBy(user);
+
+        issueService.saveOrUpdate(game);
+
+        Issue holiday = new Issue();
+        holiday.setName("Summer Holiday");
+        holiday.setDescription("Turkey, Bali Bali, ...");
+        holiday.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        holiday.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        holiday.setCreatedBy(user);
+
+        issueService.saveOrUpdate(holiday);
+
+        Issue trip = new Issue();
+        trip.setName("School Trip");
+        trip.setDescription("Cabine in da woods?");
+        trip.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        trip.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        trip.setCreatedBy(user);
+
+        issueService.saveOrUpdate(trip);
+
+        Issue adminEvent = new Issue();
+        adminEvent.setName("Shouldnt Be Visible to User");
+        adminEvent.setDescription("User is not author, so he shouldn't see it");
+        adminEvent.setCreatedAt(new LocalDate(2015, 6, 13).toDate());
+        adminEvent.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
+        adminEvent.setCreatedBy(userService.findByEmail("admin@admin.cz"));
+
+        issueService.saveOrUpdate(adminEvent);
 
     }
 
