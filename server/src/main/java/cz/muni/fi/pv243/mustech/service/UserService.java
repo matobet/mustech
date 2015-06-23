@@ -10,6 +10,7 @@ import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 /**
+ * User service implementing and initializing generic service
  * @author Milan
  */
 @Named

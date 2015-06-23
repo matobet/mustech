@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
+ * Abstract generic service with common methods for several entity services
  * @author Milan
  */
 @Transactional

@@ -2,6 +2,7 @@ package cz.muni.fi.pv243.mustech;
 
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.BaseModel;
+import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
 import cz.muni.fi.pv243.mustech.service.AbstractGenericService;
@@ -38,11 +39,9 @@ public class UserServiceIntegrationTest {
                 .resolve().withTransitivity().asFile();
         return ShrinkWrap.create(WebArchive.class, "test.war")
                 .addAsLibraries(libs)
+                .addPackage(BaseModel.class.getPackage())
                 .addClasses(
                         Resources.class,
-                        BaseModel.class,
-                        User.class,
-                        RoleType.class,
                         GenericService.class,
                         AbstractGenericService.class,
                         UserService.class,

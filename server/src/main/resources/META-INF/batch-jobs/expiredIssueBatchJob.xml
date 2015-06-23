@@ -1,12 +1,12 @@
 <job id="expiredIssueBatchJob" xmlns="http://xmlns.jcp.org/xml/ns/javaee" version="1.0">
     <step id="step1" >
-        <chunk item-count="10">
+        <chunk checkpoint-policy="item" item-count="3">
             <reader ref="issueBatchReader"/>
             <processor ref="expiredIssueBatchProcessor"/>
             <writer ref="deleteIssueBatchWriter"/>
             <skippable-exception-classes>
                 <include class="java.lang.Exception"/>
             </skippable-exception-classes>
-        </chunk>    
+        </chunk>
     </step>
 </job> 

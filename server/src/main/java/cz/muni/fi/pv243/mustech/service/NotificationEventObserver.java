@@ -2,13 +2,13 @@ package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.User;
-import cz.muni.fi.pv243.mustech.util.UserNotification;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 /**
+ * Notification event observer that trigger notification process
  * Created by Tomas on 13. 6. 2015.
  */
 @ApplicationScoped
@@ -18,11 +18,11 @@ public class NotificationEventObserver {
     private JMSProducer producer;
 
 
-    private void observe(@Observes UserNotification event)
+    private void observe(@Observes Issue issue)
     {
-        for(User user : event.getUsers())
+        for(User user : issue.getConcernedUsers())
         {
-            producer.sendMessage(user.getEmail(), generateMessageBody(event.getIssue()));
+            producer.sendMessage(user.getEmail(), generateMessageBody(issue));
         }
     }
 

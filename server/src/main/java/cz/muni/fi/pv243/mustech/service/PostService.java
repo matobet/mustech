@@ -9,6 +9,7 @@ import javax.inject.Named;
 import javax.transaction.Transactional;
 
 /**
+ * Post service implementing and initializing generic service
  * @author Tomas
  */
 @Named

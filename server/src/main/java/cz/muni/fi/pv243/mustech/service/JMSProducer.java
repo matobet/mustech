@@ -10,6 +10,7 @@ import javax.jms.*;
 import java.util.Enumeration;
 
 /**
+ * JMS producer service for notification
  * Created by Tomas on 8. 6. 2015.
  */
 @Stateless

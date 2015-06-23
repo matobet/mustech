@@ -76,8 +76,7 @@ public class ExpiredIssueBatchIntegrationTest {
 
     @Test
     @InSequence(1)
-    public void testBatch()
-    {
+    public void testBatch() {
         Issue i1 = new Issue();
         Issue i2 = new Issue();
         Calendar c = Calendar.getInstance();
@@ -105,14 +104,21 @@ public class ExpiredIssueBatchIntegrationTest {
         issueService.saveOrUpdate(i2);
 
         Assert.assertEquals("Should have 2 items.", 2, issueService.findAll().size());
+
         batchTrigger.runBatch();
     }
 
     @Test
     @InSequence(2)
-    public void testAfterBatch()
-    {
+    public void testAfterBatch() {
+
+        try {
+            Thread.sleep(50000L);
+        } catch (InterruptedException e) {
+        }
+
         List<Issue> actual = issueService.findAll();
+
         Assert.assertEquals("Should have 1 item.", 1, actual.size());
     }
 
@@ -126,7 +132,7 @@ public class ExpiredIssueBatchIntegrationTest {
 
         User stored = userService.findById(1L);
 
-        if ( stored == null) {
+        if (stored == null) {
             userService.saveOrUpdate(user);
             stored = userService.findById(1L);
         }

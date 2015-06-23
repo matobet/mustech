@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
+ * Rest endpoint for Issue entity
  * Created by Tomas on 26. 5. 2015.
  */
 @Path("/issues")

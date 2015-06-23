@@ -6,13 +6,13 @@ batch
 host=smtp.gmail.com, \
 port=465)
 
-/subsystem=mail/mail-session=MyMailSession:add(jndi-name="java:/mail/myMailSession", from="jane.doe@gmail.example.com", debug=true)
+/subsystem=mail/mail-session=MyMailSession:add(jndi-name="java:/mail/myMailSession", from="noreply.mustech@gmail.com", debug=true)
 
 /subsystem=mail/mail-session=MyMailSession/server=smtp:add( \
 outbound-socket-binding-ref=MyMailSMTP, \
 ssl=true, \
-username=jane.doe@gmail.example.com, \
-password=***)
+username=noreply.mustech@gmail.com, \
+password=mustech123)
 
 # add security domain
  

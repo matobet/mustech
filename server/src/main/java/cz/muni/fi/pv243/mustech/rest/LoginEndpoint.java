@@ -19,6 +19,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 /**
+ * Endpoint for user login
  * @author Milan
  */
 @Path("/login")

@@ -12,6 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * Rest endpoint for Poll entity
  * Created by Tomas on 1. 6. 2015.
  */
 @Path("/polls")

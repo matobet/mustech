@@ -6,6 +6,7 @@ import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;
 
 /**
+ * Repository for Post entity
  * Created by Tomas on 30. 5. 2015.
  */
 @Repository
