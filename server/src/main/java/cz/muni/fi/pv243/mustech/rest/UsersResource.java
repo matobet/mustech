@@ -15,6 +15,9 @@ import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Rest endpoint for User entity
+ */
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UsersResource {

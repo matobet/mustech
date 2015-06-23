@@ -11,6 +11,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 /**
+ * Rest endpoint for Post entity
  * Created by Tomas on 1. 6. 2015.
  */
 @Path("/posts")

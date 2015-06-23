@@ -5,6 +5,7 @@ import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Repository;
 
 /**
+ * Repository for Issue entity
  * @author Tomas
  */
 @Repository

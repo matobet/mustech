@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.model;
 import java.io.Serializable;
 
 /**
+ * Class representing notification message that will be send to users
  * Created by Tomas on 8. 6. 2015.
  */
 public class NotificationMessage implements Serializable {

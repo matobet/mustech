@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
+ * Issue service implementing and initializing generic service and own methods
  * @author Tomas
  */
 @Named

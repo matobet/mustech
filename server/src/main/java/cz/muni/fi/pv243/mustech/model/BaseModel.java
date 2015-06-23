@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
+ * Base entity with common attributes for all entities
  * @author Milan
  */
 @Data

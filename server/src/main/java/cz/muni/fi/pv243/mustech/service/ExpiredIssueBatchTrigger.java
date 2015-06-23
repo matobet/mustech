@@ -11,6 +11,7 @@ import javax.ejb.Singleton;
 import java.util.Properties;
 
 /**
+ * Trigger expired issue batch job
  * Created by Tomas on 17. 6. 2015.
  */
 @Singleton

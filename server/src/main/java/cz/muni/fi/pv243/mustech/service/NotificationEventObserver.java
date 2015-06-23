@@ -8,6 +8,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 /**
+ * Notification event observer that trigger notification process
  * Created by Tomas on 13. 6. 2015.
  */
 @ApplicationScoped

@@ -15,7 +15,7 @@ import javax.inject.Named;
 import java.util.List;
 
 /**
- * Delete expired issues.
+ * Delete expired issues batch service.
  */
 @Named
 public class DeleteIssueBatchWriter extends AbstractItemWriter

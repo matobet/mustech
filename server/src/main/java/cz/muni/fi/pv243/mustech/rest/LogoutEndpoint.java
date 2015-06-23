@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import java.net.URISyntaxException;
 
 /**
+ * Endpoint for user logout
  * @author Milan
  */
 @Path("/logout")

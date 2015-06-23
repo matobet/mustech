@@ -10,6 +10,7 @@ import javax.jms.Message;
 import javax.jms.MessageListener;
 
 /**
+ * JMS consumer for user notification
  * Created by Tomas on 8. 6. 2015.
  */
 @MessageDriven(

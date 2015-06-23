@@ -10,6 +10,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
+ * Notification service that sends notification through email
  * Created by Tomas on 8. 6. 2015.
  */
 @Stateless
