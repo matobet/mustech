@@ -22,6 +22,8 @@ public class DeleteIssueBatchWriter extends AbstractItemWriter
 {
     private final Logger log = LoggerFactory.getLogger(DeleteIssueBatchWriter.class);
 
+    private static final Object Lock = new Object();
+
     @Inject
     private IssueService issueService;
 
@@ -30,7 +32,13 @@ public class DeleteIssueBatchWriter extends AbstractItemWriter
         try {
             for (Object o : list) {
                 if (o instanceof Issue) {
-                    issueService.delete(((Issue) o).getId());
+                    synchronized (Lock){
+                        Issue i = issueService.findById(((Issue) o).getId());
+
+                        if(i != null){
+                        issueService.delete(i.getId());
+                        }
+                    }
                 }
             }
         } catch (Exception e)

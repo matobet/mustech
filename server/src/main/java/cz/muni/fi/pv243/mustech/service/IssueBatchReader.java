@@ -25,16 +25,19 @@ public class IssueBatchReader extends AbstractItemReader
     @Inject
     private IssueService issueService;
 
-    private Iterator<Issue> issueIterator;
+    private static Iterator<Issue> issueIterator;
+
+    private static final Object lock = new Object();
 
     @Override
     public Issue readItem() {
         try {
+            synchronized (lock){
             if (issueIterator == null) {
                issueIterator = issueService.findAll().iterator();
             }
 
-            return issueIterator.hasNext() ? issueIterator.next() : null;
+            return issueIterator.hasNext() ? issueIterator.next() : null;}
         }catch(Exception e)
         {
             log.debug("Error occured during item reading.",e);
