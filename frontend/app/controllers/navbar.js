@@ -1,6 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  // TODO: right now just dummy text, this property will show user's active events (not expired one)
-  numberOfActiveEvents: 5
+  numberOfActiveEvents: 0,
+  init() {
+    this._super();
+    this.store.find('issue').then(issues => {
+      this.set('numberOfActiveEvents', issues.get('length'));
+    });
+  }
 });
