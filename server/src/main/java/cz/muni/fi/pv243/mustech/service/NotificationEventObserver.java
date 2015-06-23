@@ -18,11 +18,11 @@ public class NotificationEventObserver {
     private JMSProducer producer;
 
 
-    private void observe(@Observes UserNotification event)
+    private void observe(@Observes Issue issue)
     {
-        for(User user : event.getUsers())
+        for(User user : issue.getConcernedUsers())
         {
-            producer.sendMessage(user.getEmail(), generateMessageBody(event.getIssue()));
+            producer.sendMessage(user.getEmail(), generateMessageBody(issue));
         }
     }
 
