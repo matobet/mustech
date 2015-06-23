@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.mustech.service;
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.User;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.NoResultException;
@@ -29,5 +30,10 @@ public class UserService extends AbstractGenericService<User, UserRepository> {
         {
             return null;
         }
+    }
+
+    @Override
+    public boolean canAccess(String principalName, User entity) {
+        return principalName.equals(entity.getEmail());
     }
 }

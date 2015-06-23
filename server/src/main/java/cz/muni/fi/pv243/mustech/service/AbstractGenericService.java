@@ -1,21 +1,30 @@
 package cz.muni.fi.pv243.mustech.service;
 
 
+import cz.muni.fi.pv243.mustech.model.BaseModel;
 import org.apache.deltaspike.data.api.EntityRepository;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Abstract generic service with common methods for several entity services
  * @author Milan
  */
-@Transactional
-public abstract class AbstractGenericService<T, R extends EntityRepository<T, Long>> implements GenericService<T> {
+public abstract class AbstractGenericService<T extends BaseModel, R extends EntityRepository<T, Long>> implements GenericService<T> {
 
     @Inject
     protected R repository;
+
+    @Inject
+    private PermissionService permissionService;
+
+    protected boolean canAccess(T entity) {
+        // we need to delegate the principal and role check to this Stateless EJB since
+        // CDI beans can't access the security context
+        return permissionService.checkAccess(this, entity);
+    }
 
     @Override
     public void saveOrUpdate(T t)
@@ -49,5 +58,9 @@ public abstract class AbstractGenericService<T, R extends EntityRepository<T, Lo
     }
 
     @Override
-    public List<T> findAll() { return repository.findAll(); }
+    public List<T> findAll() {
+        return repository.findAll().stream()
+                .filter(this::canAccess)
+                .collect(Collectors.toList());
+    }
 }
