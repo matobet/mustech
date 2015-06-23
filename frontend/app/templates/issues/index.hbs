@@ -8,8 +8,8 @@
                       <p>{{issue.description}}</p>
                   </div>
                   <div class="issue-bottom-info">
-                      <div class="pull-left"># participants: X</div>
-                      <div class="pull-right">End: {{moment issue.expiresAt 'DD.MM.YYYY'}}</div>
+                      <div class="text-left"><i class="mdi-action-accessibility"></i> {{issue.concernedUsers.length}}</div>
+                      <div class="text-right">Ends {{moment issue.expiresAt 'DD.MM.YYYY'}}</div>
                   </div>
               </div>
           </a>

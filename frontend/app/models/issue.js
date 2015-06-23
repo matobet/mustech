@@ -9,5 +9,7 @@ export default DS.Model.extend({
   expiresAt: DS.attr('date'),
 
   polls: DS.hasMany('poll', { async: true }),
-  posts: DS.hasMany('post', { async: true })
+  posts: DS.hasMany('post', { async: true }),
+
+  concernedUsers: DS.hasMany('user', { async: true })
 });
