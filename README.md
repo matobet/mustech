@@ -18,6 +18,8 @@ Built-in users:
 
 ## Installation
 
+You can run configuration script by command <b>jboss-cli.bat(.sh) --file=deploy.cli</b> or manually update appropriate xml file as follows: 
+
 ### standalone-full.xml
 
     <security-domain name="MustechDomain" cache-type="default">
@@ -35,6 +37,14 @@ Built-in users:
                 </login-module>
         </authentication>
     </security-domain>
+    
+    <mail-session name="MyMailSession" debug="true" jndi-name="java:/mail/myMailSession" from="noreply.mustech@gmail.com">
+                <smtp-server outbound-socket-binding-ref="MyMailSMTP" ssl="true" username="noreply.mustech@gmail.com" password="mustech123"/>
+    </mail-session>
+    
+    <outbound-socket-binding name="MyMailSMTP">
+        <remote-destination host="smtp.gmail.com" port="465"/>
+    </outbound-socket-binding>
 
 ### deployment
 
