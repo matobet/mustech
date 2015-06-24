@@ -35,7 +35,7 @@ public class User extends BaseModel {
     @Column(nullable = false)
     private RoleType role;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "concernedUsers")
+    @ManyToMany(mappedBy = "concernedUsers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIdentityReference(alwaysAsId = true)
     private Set<Issue> issues = new HashSet<>();
 
