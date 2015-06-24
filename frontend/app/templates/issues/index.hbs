@@ -1,7 +1,7 @@
 <ul class="list-group">
   {{#each issue in model}}
       <li class="list-group-item pull-left shadow-z-2">
-          <a href="#">
+          {{#link-to 'issue' issue class="issue"}}
               <div>
                   <div class="issue-top-info">
                       <h4>{{issue.name}}</h4>
@@ -12,7 +12,7 @@
                       <div class="text-right">Ends {{moment issue.expiresAt 'DD.MM.YYYY'}}</div>
                   </div>
               </div>
-          </a>
+          {{/link-to}}
       </li>
   {{/each}}
 </ul>

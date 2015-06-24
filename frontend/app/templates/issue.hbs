@@ -1,0 +1,17 @@
+
+Name: {{name}}<br>
+Description: {{description}}<br>
+Created by: {{createdBy.name}}<br>
+Created at: {{moment createdAt 'DD.MM.YYYY'}}<br>
+Expires at: {{moment expiresAt 'DD.MM.YYYY'}}<br>
+
+Polls:
+<div class="poll">
+    {{#each poll in polls}}
+        Poll question: {{poll.question}}
+        {{#each option in poll.options}}
+            <li>{{option.value}}</li>
+        {{/each}}
+    {{/each}}
+</div>
+
