@@ -53,7 +53,13 @@ public class IssueRestEndpoint {
     public void save(@Context HttpServletRequest req, @Valid Issue issue) {
         issue.setCreatedBy(userService.findByEmail(req.getUserPrincipal().getName()));
         issue.setCreatedAt(new Date());
-        issue.setId(null);
+
+        issue.getPolls().forEach(poll -> {
+            poll.setIssue(issue);
+            poll.getOptions().forEach(option -> {
+                option.setPoll(poll);
+            });
+        });
 
         issueService.saveOrUpdate(issue);
     }

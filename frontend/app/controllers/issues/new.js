@@ -13,10 +13,30 @@ export default Ember.Controller.extend({
       this.get('options').removeObject(option);
     },
     save() {
-      //TODO: save polls with issue
-      let issue = this.store.createRecord('issue', this.getProperties('name', 'description', 'expiresAt'));
+      let issue = this.store.createRecord('issue', {
+        name: this.get('name'),
+        description: this.get('description'),
+        expiresAt: this.get('expiresAt')
+      });
+
+      let poll = this.store.createRecord('poll', {
+        question: this.get('question')
+      });
+
+      this.get('options').forEach(option => {
+        let record = this.store.createRecord('option', {
+          value: option.value
+        });
+        poll.get('options').pushObject(record);
+      });
+
+      issue.get('polls').pushObject(poll);
+
       issue.save()
-        .then(() => this.notify.info('Issue created!'))
+        .then(() => {
+          this.notify.info('Issue created!');
+          this.transitionTo('issues');
+        })
         .catch(e => {
           Ember.Logger.debug('Issue creation failed!', e);
           this.notify.alert('Issue creation failed!');
