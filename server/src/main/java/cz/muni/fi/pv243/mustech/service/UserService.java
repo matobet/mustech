@@ -13,8 +13,7 @@ import javax.transaction.Transactional;
  * User service implementing and initializing generic service
  * @author Milan
  */
-@Named
-@Transactional
+@Service
 public class UserService extends AbstractGenericService<User, UserRepository> {
 
     public User findByEmail(String email) {

@@ -15,8 +15,7 @@ import javax.transaction.Transactional;
  * Issue service implementing and initializing generic service and own methods
  * @author Tomas
  */
-@Named
-@Transactional
+@Service
 public class IssueService extends AbstractGenericService<Issue, IssueRepository> implements PrincipalChecker<Issue> {
 
     @Inject

@@ -12,8 +12,7 @@ import javax.transaction.Transactional;
  * Post service implementing and initializing generic service
  * @author Tomas
  */
-@Named
-@Transactional
+@Service
 public class PostService extends AbstractGenericService<Post, PostRepository> implements PrincipalChecker<Post> {
 
     @Inject

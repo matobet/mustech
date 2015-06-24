@@ -13,8 +13,7 @@ import javax.transaction.Transactional;
  * Option service implementing and initializing generic service
  * @author Tomas
  */
-@Named
-@Transactional
+@Service
 public class OptionService extends AbstractGenericService<Option, OptionRepository> {
 
     @Inject
