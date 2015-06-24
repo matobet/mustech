@@ -56,8 +56,17 @@ public class AppInitializer {
         dinner.setExpiresAt(new LocalDate(2015, 12, 31).toDate());
         dinner.setCreatedBy(user);
 
-        Poll poll = initDemoPoll(dinner);
+        Poll poll = initDemoPoll(dinner, "tady ne");
         pollService.saveOrUpdate(poll);
+
+        Poll poll2 = initDemoPoll(dinner, "na pivo");
+        pollService.saveOrUpdate(poll2);
+
+        Poll poll3 = initDemoPoll(dinner, "hospoda pod schodem");
+        pollService.saveOrUpdate(poll3);
+
+        Poll poll4 = initDemoPoll(dinner, "restaurace nad schodem");
+        pollService.saveOrUpdate(poll4);
 
         issueService.saveOrUpdate(dinner);
         issueService.addConcernedUser(dinner.getId(), user.getId());
@@ -100,9 +109,9 @@ public class AppInitializer {
 
     }
 
-    private Poll initDemoPoll(Issue issue) {
+    private Poll initDemoPoll(Issue issue, String name) {
         Poll poll = new Poll();
-        poll.setQuestion("K5 Steak House");
+        poll.setQuestion(name);
 
         Option yes = new Option();
         yes.setValue("Yes");
