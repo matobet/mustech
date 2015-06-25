@@ -1,10 +1,12 @@
 package cz.muni.fi.pv243.mustech;
 
 import cz.muni.fi.pv243.mustech.dal.AnswerRepository;
+import cz.muni.fi.pv243.mustech.dal.IssueRepository;
 import cz.muni.fi.pv243.mustech.dal.OptionRepository;
 import cz.muni.fi.pv243.mustech.dal.PollRepository;
 import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.*;
+import cz.muni.fi.pv243.mustech.rest.IssueRestEndpoint;
 import cz.muni.fi.pv243.mustech.service.*;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -53,6 +55,8 @@ public class PollServiceIntegrationTest {
                         Service.class,
                         AnswerService.class,
                         AnswerRepository.class,
+                        IssueService.class,
+                        IssueRepository.class,
                         Issue.class,
                         Poll.class,
                         Post.class,

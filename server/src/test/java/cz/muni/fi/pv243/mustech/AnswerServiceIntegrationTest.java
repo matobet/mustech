@@ -46,6 +46,8 @@ public class AnswerServiceIntegrationTest {
                         AbstractGenericService.class,
                         AnswerService.class,
                         AnswerRepository.class,
+                        IssueService.class,
+                        IssueRepository.class,
                         Issue.class,
                         Poll.class,
                         Post.class,
