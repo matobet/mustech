@@ -32,7 +32,6 @@ public class User extends BaseModel {
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private RoleType role;
 
     @ManyToMany(mappedBy = "concernedUsers", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

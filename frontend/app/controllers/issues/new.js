@@ -13,6 +13,15 @@ export default Ember.Controller.extend({
     removePollOption(option) {
       this.get('options').removeObject(option);
     },
+    addUserEmail() {
+      let invitedUsers = this.get('invitedUsers');
+      invitedUsers.pushObject({
+        label: 'E-mail'
+      });
+    },
+    removeUserEmail(user) {
+      this.get('invitedUsers').removeObject(user);
+    },
     save() {
       let issue = this.store.createRecord('issue', {
         name: this.get('name'),
@@ -24,7 +33,6 @@ export default Ember.Controller.extend({
         question: this.get('question')
       });
 
-
       this.get('options').forEach(option => {
         let record = this.store.createRecord('option', {
           value: option.value
@@ -33,8 +41,11 @@ export default Ember.Controller.extend({
       });
 
       this.get('invitedUsers').forEach(user => {
+        //TODO: should be DTO not User
         let record = this.store.createRecord('user', {
-          email: user.value
+          name: 'dummy',
+          email: user.email,
+          password: '123456789'
         });
         issue.get('concernedUsers').pushObject(record);
       });
@@ -50,15 +61,6 @@ export default Ember.Controller.extend({
           Ember.Logger.debug('Issue creation failed!', e);
           this.notify.alert('Issue creation failed!');
         });
-    },
-    addUserEmail() {
-      let invitedUsers = this.get('invitedUsers');
-      invitedUsers.pushObject({
-        label: 'email'
-      });
-    },
-    removeUserEmail(user) {
-      this.get('invitedUsers').removeObject(user);
     }
   }
 });

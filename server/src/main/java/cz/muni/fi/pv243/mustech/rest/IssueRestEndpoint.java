@@ -62,12 +62,15 @@ public class IssueRestEndpoint {
             });
         });
 
-        issue.getConcernedUsers().forEach(user -> {
-            User u = userService.findByEmail(user.getEmail());
-            issueService.addConcernedUser(issue.getId(), u.getId());
-        });
-
         issueService.saveOrUpdate(issue);
+
+//        issue.getConcernedUsers().forEach(user -> {
+//            User u = userService.findByEmail(user.getEmail());
+//            if (u == null) {
+//                userService.saveOrUpdate(user);
+//            }
+//            issueService.addConcernedUser(issue.getId(), user.getId());
+//        });
     }
 
     @PUT

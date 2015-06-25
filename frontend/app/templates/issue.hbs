@@ -1,79 +1,28 @@
-<div class="issue-detail">
-    <div class="row">
-        <div class="lead">
-            {{model.name}}
-        </div>
-        <div class="row">
-            Description: {{model.description}}
-        </div>
-        <div class="row">
-            Created by: {{model.createdBy.email}}
-        </div>
-        <div class="row">
-            Created at: {{moment model.createdAt 'DD.MM.YYYY'}}
-        </div>
-        <div class="row">
-            Expires at: {{moment model.expiresAt 'DD.MM.YYYY'}}
-        </div>
+<div class="model-container shadow-z-2">
+    <div class="issue-top-info">
+        <h3>{{model.name}}</h3>
+        <p>{{model.description}}</p>
+        <h6>Initiator: {{model.createdBy.email}}</h6>
+    </div>
+    <div class="issue-bottom-info">
+        <div class="text-left"><i class="mdi-action-accessibility"></i> {{model.concernedUsers.length}}</div>
+        <div class="text-right">Ends {{moment model.expiresAt 'DD.MM.YYYY'}}</div>
     </div>
 </div>
 
-<div class="row">
-    Polls:
-</div>
-
-{{#each poll in model.polls}}
-    <div class="col-md-4">
-        <table class='table'>
-            <thead>
-            <tr>
-                <th>
-                    {{poll.question}}
-                </th>
-            </tr>
-            </thead>
-            <div>
-                {{#each option in poll.options}}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{option.value}}
-                        </div>
-                        <div class="col-md-6">
-                            <button {{action 'vote' option.id}}
-                                    class="btn btn-info pull-right">{{option.answers.length}}</button>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-            <div>
-                <div>
-
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h5>Total votes: {{totalVotes}}</h5>
-                        </div>
-                    </div>
-
+<div class="model-container shadow-z-1">
+  {{#each poll in model.polls}}
+      <div class="poll-detail">
+          <h4>{{poll.question}}:</h4>
+          <div class="options">
+            {{#each option in poll.options}}
+                <div class="row">
+                    <label class="col-lg-offset-1 col-lg-1">{{option.value}}</label>
+                    <button {{action 'vote' option}} class="btn btn-material-amber col-lg-1">{{option.answers.length}}</button>
                 </div>
-            </div>
-        </table>
-    </div>
-{{/each}}
-
-
-{{#each post in model.posts}}
-    <div class="col-md-4">
-        <table class='table'>
-            <thead>
-            <tr>
-                <th>
-                    {{post.user.name}} at {{moment post.timestamp 'DD.MM.YYYY'}}
-                </th>
-            </tr>
-            </thead>
-            <div class="row">
-                {{post.text}}
-            </div>
-        </table>
-    </div>
-{{/each}}
+            {{/each}}
+              <hr/>
+          </div>
+      </div>
+  {{/each}}
+</div>

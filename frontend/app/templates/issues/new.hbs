@@ -2,6 +2,24 @@
     {{form-field label="Name" type="text" value=name placeholder="Name" autofocus="autofocus"}}
     {{form-textarea label="Description" rows="2" cols="80" value=description placeholder="Description"}}
     {{form-datepicker label="End of Voting" value=expiresAt format="dd.MM yyyy"}}
+    {{#user-field legend="Invite Users"}}
+      {{#each user in invitedUsers}}
+          <div class="row">
+              <div class="col-lg-11">
+                {{form-field label=user.label type="email" value=user.email placeholder=user.label}}
+              </div>
+              <div class="col-lg-1">
+                  <button {{action 'removeUserEmail' user}} class="btn btn-sm btn-material-red">
+                      <i class="mdi-content-remove"></i>
+                  </button>
+              </div>
+          </div>
+      {{/each}}
+      <div class="col-lg-offset-2">
+          <button {{action 'addUserEmail'}} class="btn btn-sm btn-material-orange"><i class="mdi-content-add"></i>
+          </button>
+      </div>
+    {{/user-field}}
     {{#poll-field legend="Initial Proposition" value=question}}
         {{#each option in options}}
             <div class="row">
@@ -9,8 +27,9 @@
                     {{form-field label=option.label type="text" value=option.value placeholder=option.label}}
                 </div>
                 <div class="col-lg-1">
-                    <button {{action 'removePollOption' option}} class="btn btn-sm btn-material-red"><i
-                            class="mdi-content-remove"></i></button>
+                    <button {{action 'removePollOption' option}} class="btn btn-sm btn-material-red">
+                        <i class="mdi-content-remove"></i>
+                    </button>
                 </div>
             </div>
         {{/each}}
@@ -19,21 +38,4 @@
             </button>
         </div>
     {{/poll-field}}
-    {{#user-field legend="Invited users" value=email}}
-        {{#each user in invitedUsers}}
-            <div class="row">
-                <div class="col-lg-11">
-                    {{form-field label=user.label type="text" value=user.value placeholder=user.label}}
-                </div>
-                <div class="col-lg-1">
-                    <button {{action 'removeUserEmail' user}} class="btn btn-sm btn-material-red"><i
-                            class="mdi-content-remove"></i></button>
-                </div>
-            </div>
-        {{/each}}
-        <div class="col-lg-offset-2">
-            <button {{action 'addUserEmail'}} class="btn btn-sm btn-material-orange"><i class="mdi-content-add"></i>
-            </button>
-        </div>
-    {{/user-field}}
 {{/object-form}}

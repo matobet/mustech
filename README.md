@@ -18,7 +18,13 @@ Built-in users:
 
 ## Installation
 
-You can run configuration script by command <b>jboss-cli.bat(.sh) --file=deploy.cli</b> or manually update appropriate xml file as follows: 
+You can run configuration script by command 
+
+`jboss-cli.bat --file=deploy.cli`
+or
+`jboss-cli.sh --file=deploy.cli`
+
+or manually update appropriate xml file as follows: 
 
 ### standalone-full.xml
 
