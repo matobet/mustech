@@ -53,9 +53,9 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   },
 
   messageHandler(data) {
-    console.log('message: ' + JSON.stringify(data));
-    // TODO: Fix getting store
-    this.get('store').pushPayload(data);
+    let payload = JSON.stringify(data);
+    console.log('message: ' + payload);
+    this.notify.info('Push update: ' + payload);
   },
 
   closeHandler() {
