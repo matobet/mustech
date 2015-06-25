@@ -1,5 +1,10 @@
-{{#each user in model}}
-  <li>Name: {{user.name}}</li>
-  <li>Email: {{user.email}}</li>
-  <li>Password Hash: {{user.password}}</li>
-{{/each}}
+<ul class="list-group">
+  {{#each user in model}}
+      <li class="list-group-item model-container pull-left shadow-z-2">
+          <div>
+                  <h4>Name:</h4> {{user.name}}
+                  <h4>Email:</h4> {{user.email}}
+          </div>
+      </li>
+  {{/each}}
+</ul>
