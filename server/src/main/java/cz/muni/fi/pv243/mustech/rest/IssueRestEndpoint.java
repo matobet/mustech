@@ -2,6 +2,7 @@ package cz.muni.fi.pv243.mustech.rest;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
 import cz.muni.fi.pv243.mustech.model.Issue;
+import cz.muni.fi.pv243.mustech.model.User;
 import cz.muni.fi.pv243.mustech.service.IssueService;
 import cz.muni.fi.pv243.mustech.service.UserService;
 import org.slf4j.Logger;
@@ -59,6 +60,11 @@ public class IssueRestEndpoint {
             poll.getOptions().forEach(option -> {
                 option.setPoll(poll);
             });
+        });
+
+        issue.getConcernedUsers().forEach(user -> {
+            User u = userService.findByEmail(user.getEmail());
+            issueService.addConcernedUser(issue.getId(), u.getId());
         });
 
         issueService.saveOrUpdate(issue);

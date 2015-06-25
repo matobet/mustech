@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   options: [],
+  invitedUsers: [],
   actions: {
     addPollOption() {
       let options = this.get('options');
@@ -23,11 +24,19 @@ export default Ember.Controller.extend({
         question: this.get('question')
       });
 
+
       this.get('options').forEach(option => {
         let record = this.store.createRecord('option', {
           value: option.value
         });
         poll.get('options').pushObject(record);
+      });
+
+      this.get('invitedUsers').forEach(user => {
+        let record = this.store.createRecord('user', {
+          email: user.value
+        });
+        issue.get('concernedUsers').pushObject(record);
       });
 
       issue.get('polls').pushObject(poll);
@@ -41,6 +50,15 @@ export default Ember.Controller.extend({
           Ember.Logger.debug('Issue creation failed!', e);
           this.notify.alert('Issue creation failed!');
         });
+    },
+    addUserEmail() {
+      let invitedUsers = this.get('invitedUsers');
+      invitedUsers.pushObject({
+        label: 'email'
+      });
+    },
+    removeUserEmail(user) {
+      this.get('invitedUsers').removeObject(user);
     }
   }
 });
