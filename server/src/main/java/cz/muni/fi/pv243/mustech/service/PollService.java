@@ -4,7 +4,6 @@ import cz.muni.fi.pv243.mustech.dal.PollRepository;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.Poll;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -13,7 +12,8 @@ import javax.transaction.Transactional;
  * Poll service implementing and initializing generic service
  * @author Tomas
  */
-@Service
+@Named
+@Transactional
 public class PollService extends AbstractGenericService<Poll, PollRepository> {
 
     @Inject

@@ -18,7 +18,7 @@ public abstract class AbstractGenericService<T extends BaseModel, R extends Enti
     protected R repository;
 
     @Inject
-    private PermissionService permissionService;
+    private IPermissionService permissionService;
 
     protected boolean canAccess(T entity) {
         // we need to delegate the principal and role check to this Stateless EJB since

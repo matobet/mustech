@@ -5,7 +5,6 @@ import cz.muni.fi.pv243.mustech.dal.UserRepository;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.User;
 
-import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,7 +14,8 @@ import javax.transaction.Transactional;
  * Issue service implementing and initializing generic service and own methods
  * @author Tomas
  */
-@Service
+@Named
+@Transactional
 public class IssueService extends AbstractGenericService<Issue, IssueRepository> implements PrincipalChecker<Issue> {
 
     @Inject

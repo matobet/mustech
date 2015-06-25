@@ -42,6 +42,7 @@ public class ExpiredIssueBatchIntegrationTest {
                         Resources.class,
                         BaseModel.class,
                         User.class,
+                        Service.class,
                         RoleType.class,
                         GenericService.class,
                         AbstractGenericService.class,
@@ -57,6 +58,8 @@ public class ExpiredIssueBatchIntegrationTest {
                         Option.class,
                         Answer.class,
                         PrincipalChecker.class,
+                        IPermissionService.class,
+                        TestPermissionService.class,
                         UserService.class,
                         UserRepository.class)
                 .addAsResource("META-INF/persistence.xml")

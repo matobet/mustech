@@ -12,7 +12,8 @@ import javax.transaction.Transactional;
  * Answer service implementing and initializing generic service
  * @author Tomas
  */
-@Service
+@Named
+@Transactional
 public class AnswerService extends AbstractGenericService<Answer, AnswerRepository> {
 
     @Inject

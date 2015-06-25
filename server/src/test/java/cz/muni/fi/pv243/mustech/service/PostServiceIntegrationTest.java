@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.mustech;
+package cz.muni.fi.pv243.mustech.service;
 
 import cz.muni.fi.pv243.mustech.dal.*;
 import cz.muni.fi.pv243.mustech.model.*;
@@ -16,6 +16,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.ejb.EJBContext;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.io.File;
@@ -44,6 +48,9 @@ public class PostServiceIntegrationTest {
                         AbstractGenericService.class,
                         AnswerService.class,
                         AnswerRepository.class,
+                        IPermissionService.class,
+                        TestPermissionService.class,
+                        Service.class,
                         Issue.class,
                         Poll.class,
                         Post.class,
@@ -59,6 +66,7 @@ public class PostServiceIntegrationTest {
                         UserService.class,
                         UserRepository.class)
                 .addAsResource("META-INF/persistence.xml")
+//                .addAsServiceProvider(PrincipalChecker.class,PermissionServiceMy.class)
                 .addAsResource("META-INF/apache-deltaspike.properties")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
     }
@@ -230,3 +238,14 @@ public class PostServiceIntegrationTest {
         return calendar;
     }
 }
+
+//@Stateless
+//class PermissionServiceMy extends PermissionService
+//{
+//    public PermissionServiceMy() {
+//    }
+//
+//    public <T extends BaseModel> boolean checkAccess(PrincipalChecker<T> checker, T entity) {
+//        return true;
+//    }
+//}

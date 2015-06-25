@@ -5,9 +5,7 @@ import cz.muni.fi.pv243.mustech.model.BaseModel;
 import cz.muni.fi.pv243.mustech.model.Issue;
 import cz.muni.fi.pv243.mustech.model.RoleType;
 import cz.muni.fi.pv243.mustech.model.User;
-import cz.muni.fi.pv243.mustech.service.AbstractGenericService;
-import cz.muni.fi.pv243.mustech.service.GenericService;
-import cz.muni.fi.pv243.mustech.service.UserService;
+import cz.muni.fi.pv243.mustech.service.*;
 import cz.muni.fi.pv243.mustech.util.Resources;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -42,6 +40,10 @@ public class UserServiceIntegrationTest {
                 .addPackage(BaseModel.class.getPackage())
                 .addClasses(
                         Resources.class,
+                        Service.class,
+                        IPermissionService.class,
+                        TestPermissionService.class,
+                        PrincipalChecker.class,
                         GenericService.class,
                         AbstractGenericService.class,
                         UserService.class,
