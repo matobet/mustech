@@ -54,7 +54,11 @@ public abstract class AbstractGenericService<T extends BaseModel, R extends Enti
         {
             throw new IllegalArgumentException("Id must be positive.");
         }
-        return repository.findBy(id);
+        T entity = repository.findBy(id);
+        if (!canAccess(entity)) {
+            return null;
+        }
+        return entity;
     }
 
     @Override
